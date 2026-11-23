@@ -1,0 +1,813 @@
+==== capture start (deferred work recorded before this point is missing)
+---- immediate context C1, 391 events
+  render targets: null null null null null null null null
+  render targets: null null null null null null null null
+  render targets: #811b2 tex 3840x2160 r11g11b10f as r11g11b10f depth #7352a tex 3840x2160 r32_typeless as d32f
+  render targets: null null null null null null null null
+  render targets: #811b2 tex 3840x2160 r11g11b10f as r11g11b10f depth #7352a tex 3840x2160 r32_typeless as d32f
+  render targets: null null null null null null null null
+  render targets: #816da tex 3840x2160 r11g11b10f as r11g11b10f #6610a tex 3840x2160 fmt9 as rgba16f #66136 tex 3840x2160 r32_typeless as r32f
+  FULLSCREEN ps40e6b08f vs58264f20 draw 6 indices viewport 3840x2160 at 0,0 -> #816da tex 3840x2160 r11g11b10f as r11g11b10f #6610a tex 3840x2160 fmt9 as rgba16f #66136 tex 3840x2160 r32_typeless as r32f
+      t0 = #811b2 tex 3840x2160 r11g11b10f as r11g11b10f
+      t1 = #7331a tex 3840x2160 r32_typeless as r32f
+      t2 = #7c8fe tex 3840x2160 fmt9 as rgba16f
+      t3 = #7cb0e tex 3840x2160 r32_typeless as r32f
+      t4 = #734fe tex 3840x2160 rg8uint as rg8uint
+      b0 = cb #20cce buf 8388608 +8960
+  render targets: null null null null null null null null
+  clear #63eae tex 1920x1080 r11g11b10f as r11g11b10f to 0 0 0 0
+  render targets: #63eae tex 1920x1080 r11g11b10f as r11g11b10f depth #63fb6 tex 1920x1080 r32_typeless as d32f
+  render targets: null null null null null null null null
+  render targets: #816da tex 3840x2160 r11g11b10f as r11g11b10f
+  FULLSCREEN ps5921bc7e vscdbcb30a draw 6 indices viewport 3840x2160 at 0,0 -> #816da tex 3840x2160 r11g11b10f as r11g11b10f
+      t0 = #63eae tex 1920x1080 r11g11b10f as r11g11b10f
+      b0 = cb #20cce buf 8388608 +9728
+  render targets: null null null null null null null null
+  render targets: #80ffa tex 3840x2160 r11g11b10f as r11g11b10f
+  FULLSCREEN psfc17c302 vscdbcb30a draw 6 indices viewport 3840x2160 at 0,0 -> #80ffa tex 3840x2160 r11g11b10f as r11g11b10f
+      t0 = #816da tex 3840x2160 r11g11b10f as r11g11b10f
+      b0 = cb #20cce buf 8388608 +10240
+  render targets: null null null null null null null null
+  render targets: #80ffa tex 3840x2160 r11g11b10f as r11g11b10f depth #7352a tex 3840x2160 r32_typeless as d32f
+  render targets: null null null null null null null null
+  render targets: #65db2 tex 3840x2160 r11g11b10f as r11g11b10f
+  FULLSCREEN ps49dc83e9 vscdbcb30a draw 6 indices viewport 3840x2160 at 0,0 -> #65db2 tex 3840x2160 r11g11b10f as r11g11b10f
+      t0 = #80ffa tex 3840x2160 r11g11b10f as r11g11b10f
+      t1 = #734a6 tex 3840x2160 r11g11b10f as r11g11b10f
+      t2 = #8549e tex 3840x2160 rgb10a2_typeless as rgb10a2unorm
+      b0 = cb #20cce buf 8388608 +10752
+  render targets: null null null null null null null null
+  render targets: #81396 tex 3840x2160 r11g11b10f as r11g11b10f
+  FULLSCREEN ps77251554 vs58264f20 draw 6 indices viewport 3840x2160 at 0,0 -> #81396 tex 3840x2160 r11g11b10f as r11g11b10f
+      t0 = #65db2 tex 3840x2160 r11g11b10f as r11g11b10f
+      b0 = cb #20cce buf 8388608 +11264
+  render targets: null null null null null null null null
+  render targets: #8115a tex 3840x2160 r11g11b10f as r11g11b10f
+  FULLSCREEN ps77251554 vs58264f20 draw 6 indices viewport 3840x2160 at 0,0 -> #8115a tex 3840x2160 r11g11b10f as r11g11b10f
+      t0 = #81396 tex 3840x2160 r11g11b10f as r11g11b10f
+      b0 = cb #20cce buf 8388608 +12032
+  render targets: null null null null null null null null
+  render targets: #81baa tex 3840x2160 r11g11b10f as r11g11b10f
+  FULLSCREEN ps77251554 vs58264f20 draw 6 indices viewport 3840x2160 at 0,0 -> #81baa tex 3840x2160 r11g11b10f as r11g11b10f
+      t0 = #8115a tex 3840x2160 r11g11b10f as r11g11b10f
+      b0 = cb #20cce buf 8388608 +12800
+  render targets: null null null null null null null null
+  render targets: #81236 tex 1920x1080 r11g11b10f as r11g11b10f
+  FULLSCREEN ps77251554 vs58264f20 draw 6 indices viewport 1920x1080 at 0,0 -> #81236 tex 1920x1080 r11g11b10f as r11g11b10f
+      t0 = #81baa tex 3840x2160 r11g11b10f as r11g11b10f
+      b0 = cb #20cce buf 8388608 +13568
+  render targets: null null null null null null null null
+  render targets: #810d6 tex 1920x1080 r11g11b10f as r11g11b10f
+  FULLSCREEN ps77251554 vs58264f20 draw 6 indices viewport 1920x1080 at 0,0 -> #810d6 tex 1920x1080 r11g11b10f as r11g11b10f
+      t0 = #81236 tex 1920x1080 r11g11b10f as r11g11b10f
+      b0 = cb #20cce buf 8388608 +14336
+  render targets: null null null null null null null null
+  render targets: #8112e tex 960x540 r11g11b10f as r11g11b10f
+  FULLSCREEN ps77251554 vs58264f20 draw 6 indices viewport 960x540 at 0,0 -> #8112e tex 960x540 r11g11b10f as r11g11b10f
+      t0 = #810d6 tex 1920x1080 r11g11b10f as r11g11b10f
+      b0 = cb #20cce buf 8388608 +15104
+  render targets: null null null null null null null null
+  render targets: #80e6e tex 960x540 r11g11b10f as r11g11b10f
+  FULLSCREEN ps77251554 vs58264f20 draw 6 indices viewport 960x540 at 0,0 -> #80e6e tex 960x540 r11g11b10f as r11g11b10f
+      t0 = #8112e tex 960x540 r11g11b10f as r11g11b10f
+      b0 = cb #20cce buf 8388608 +15872
+  render targets: null null null null null null null null
+  render targets: #8128e tex 480x270 r11g11b10f as r11g11b10f
+  FULLSCREEN ps77251554 vs58264f20 draw 6 indices viewport 480x270 at 0,0 -> #8128e tex 480x270 r11g11b10f as r11g11b10f
+      t0 = #80e6e tex 960x540 r11g11b10f as r11g11b10f
+      b0 = cb #20cce buf 8388608 +16640
+  render targets: null null null null null null null null
+  render targets: #813ee tex 480x270 r11g11b10f as r11g11b10f
+  FULLSCREEN ps77251554 vs58264f20 draw 6 indices viewport 480x270 at 0,0 -> #813ee tex 480x270 r11g11b10f as r11g11b10f
+      t0 = #8128e tex 480x270 r11g11b10f as r11g11b10f
+      b0 = cb #20cce buf 8388608 +17408
+  render targets: null null null null null null null null
+  render targets: #8141a tex 240x135 r11g11b10f as r11g11b10f
+  FULLSCREEN ps77251554 vs58264f20 draw 6 indices viewport 240x135 at 0,0 -> #8141a tex 240x135 r11g11b10f as r11g11b10f
+      t0 = #813ee tex 480x270 r11g11b10f as r11g11b10f
+      b0 = cb #20cce buf 8388608 +18176
+  render targets: null null null null null null null null
+  render targets: #734a6 tex 3840x2160 r11g11b10f as r11g11b10f
+  FULLSCREEN pse3003a93 vscdbcb30a draw 6 indices viewport 3840x2160 at 0,0 -> #734a6 tex 3840x2160 r11g11b10f as r11g11b10f
+      t1 = #8115a tex 3840x2160 r11g11b10f as r11g11b10f
+      t2 = #81236 tex 1920x1080 r11g11b10f as r11g11b10f
+      t3 = #8112e tex 960x540 r11g11b10f as r11g11b10f
+      t4 = #8128e tex 480x270 r11g11b10f as r11g11b10f
+      t5 = #8141a tex 240x135 r11g11b10f as r11g11b10f
+      b0 = cb #20cce buf 8388608 +18944
+  render targets: null null null null null null null null
+  render targets: #80ffa tex 3840x2160 r11g11b10f as r11g11b10f
+  FULLSCREEN ps5921bc7e vscdbcb30a draw 6 indices viewport 3840x2160 at 0,0 -> #80ffa tex 3840x2160 r11g11b10f as r11g11b10f
+      t0 = #734a6 tex 3840x2160 r11g11b10f as r11g11b10f
+      b0 = cb #20cce buf 8388608 +19456
+  render targets: null null null null null null null null
+  render targets: #73372 tex 3840x2160 r11g11b10f as r11g11b10f
+  FULLSCREEN ps5921bc7e vscdbcb30a draw 6 indices viewport 3840x2160 at 0,0 -> #73372 tex 3840x2160 r11g11b10f as r11g11b10f
+      t0 = #80ffa tex 3840x2160 r11g11b10f as r11g11b10f
+      b0 = cb #20cce buf 8388608 +19968
+  render targets: null null null null null null null null
+  render targets: #7344e tex 3840x2160 rg8uint as rg8uint
+  FULLSCREEN ps04ab0c87 vscdbcb30a draw 6 indices viewport 3840x2160 at 0,0 -> #7344e tex 3840x2160 rg8uint as rg8uint
+      t0 = #734fe tex 3840x2160 rg8uint as rg8uint
+  render targets: null null null null null null null null
+  render targets: #735da tex 3840x2160 r16f as r16f
+  FULLSCREEN psc88c1477 vscdbcb30a draw 6 indices viewport 3840x2160 at 0,0 -> #735da tex 3840x2160 r16f as r16f
+      t0 = #7352a tex 3840x2160 r32_typeless as r32f
+      b0 = cb #20cce buf 8388608 +20736
+  render targets: null null null null null null null null
+  render targets: #80f1e tex 1920x1080 r11g11b10f as r11g11b10f
+  FULLSCREEN ps8c16417c vscdbcb30a draw 6 indices viewport 1920x1080 at 0,0 -> #80f1e tex 1920x1080 r11g11b10f as r11g11b10f
+      t0 = #80ffa tex 3840x2160 r11g11b10f as r11g11b10f
+  render targets: null null null null null null null null
+  render targets: #810d6 tex 1920x1080 r11g11b10f as r11g11b10f
+  FULLSCREEN psb4728940 vsd413ba5c draw 6 indices viewport 1920x1080 at 0,0 -> #810d6 tex 1920x1080 r11g11b10f as r11g11b10f
+      t0 = #80f1e tex 1920x1080 r11g11b10f as r11g11b10f
+      b0 = cb #20cce buf 8388608 +21504
+  render targets: null null null null null null null null
+  render targets: #81236 tex 1920x1080 r11g11b10f as r11g11b10f
+  FULLSCREEN psb4728940 vsd413ba5c draw 6 indices viewport 1920x1080 at 0,0 -> #81236 tex 1920x1080 r11g11b10f as r11g11b10f
+      t0 = #810d6 tex 1920x1080 r11g11b10f as r11g11b10f
+      b0 = cb #20cce buf 8388608 +22016
+  render targets: null null null null null null null null
+  render targets: #80f1e tex 1920x1080 r11g11b10f as r11g11b10f
+  FULLSCREEN ps40cfd35e vs58264f20 draw 6 indices viewport 1920x1080 at 0,0 -> #80f1e tex 1920x1080 r11g11b10f as r11g11b10f
+      t0 = #80ffa tex 3840x2160 r11g11b10f as r11g11b10f
+      t1 = #81236 tex 1920x1080 r11g11b10f as r11g11b10f
+      b0 = cb #20cce buf 8388608 +22528
+  render targets: null null null null null null null null
+  render targets: #811b2 tex 3840x2160 r11g11b10f as r11g11b10f
+  FULLSCREEN ps5921bc7e vscdbcb30a draw 6 indices viewport 3840x2160 at 0,0 -> #811b2 tex 3840x2160 r11g11b10f as r11g11b10f
+      t0 = #80ffa tex 3840x2160 r11g11b10f as r11g11b10f
+      b0 = cb #20cce buf 8388608 +23040
+  render targets: null null null null null null null null
+  render targets: #811b2 tex 3840x2160 r11g11b10f as r11g11b10f
+  FULLSCREEN ps5921bc7e vscdbcb30a draw 6 indices viewport 3840x2160 at 0,0 -> #811b2 tex 3840x2160 r11g11b10f as r11g11b10f
+      t0 = #80f1e tex 1920x1080 r11g11b10f as r11g11b10f
+      b0 = cb #20cce buf 8388608 +23552
+  render targets: null null null null null null null null
+  render targets: #80f1e tex 1920x1080 r11g11b10f as r11g11b10f
+  FULLSCREEN ps8c16417c vscdbcb30a draw 6 indices viewport 1920x1080 at 0,0 -> #80f1e tex 1920x1080 r11g11b10f as r11g11b10f
+      t0 = #811b2 tex 3840x2160 r11g11b10f as r11g11b10f
+  render targets: null null null null null null null null
+  render targets: #810d6 tex 1920x1080 r11g11b10f as r11g11b10f
+  FULLSCREEN psb4728940 vsb00e9ce9 draw 6 indices viewport 1920x1080 at 0,0 -> #810d6 tex 1920x1080 r11g11b10f as r11g11b10f
+      t0 = #80f1e tex 1920x1080 r11g11b10f as r11g11b10f
+      b0 = cb #20cce buf 8388608 +24320
+  render targets: null null null null null null null null
+  render targets: #81236 tex 1920x1080 r11g11b10f as r11g11b10f
+  FULLSCREEN psb4728940 vsb00e9ce9 draw 6 indices viewport 1920x1080 at 0,0 -> #81236 tex 1920x1080 r11g11b10f as r11g11b10f
+      t0 = #810d6 tex 1920x1080 r11g11b10f as r11g11b10f
+      b0 = cb #20cce buf 8388608 +24832
+  render targets: null null null null null null null null
+  render targets: #816da tex 3840x2160 r11g11b10f as r11g11b10f
+  FULLSCREEN ps5921bc7e vscdbcb30a draw 6 indices viewport 3840x2160 at 0,0 -> #816da tex 3840x2160 r11g11b10f as r11g11b10f
+      t0 = #811b2 tex 3840x2160 r11g11b10f as r11g11b10f
+      b0 = cb #20cce buf 8388608 +25344
+  render targets: null null null null null null null null
+  render targets: #816da tex 3840x2160 r11g11b10f as r11g11b10f
+  FULLSCREEN ps5921bc7e vscdbcb30a draw 6 indices viewport 3840x2160 at 0,0 -> #816da tex 3840x2160 r11g11b10f as r11g11b10f
+      t0 = #81236 tex 1920x1080 r11g11b10f as r11g11b10f
+      b0 = cb #20cce buf 8388608 +25856
+  render targets: null null null null null null null null
+  render targets: #81396 tex 3840x2160 r11g11b10f as r11g11b10f
+  FULLSCREEN pseb20620b vscdbcb30a draw 6 indices viewport 3840x2160 at 0,0 -> #81396 tex 3840x2160 r11g11b10f as r11g11b10f
+      t0 = #816da tex 3840x2160 r11g11b10f as r11g11b10f
+      b0 = cb #20cce buf 8388608 +26368
+  render targets: null null null null null null null null
+  render targets: #8178a tex 3840x2160 rgba8_typeless as rgba8unorm
+  FULLSCREEN psf2011a7b vscdbcb30a draw 6 indices viewport 3840x2160 at 0,0 -> #8178a tex 3840x2160 rgba8_typeless as rgba8unorm
+      t0 = #81396 tex 3840x2160 r11g11b10f as r11g11b10f
+  render targets: null null null null null null null null
+  render targets: #8178a tex 3840x2160 rgba8_typeless as rgba8unorm depth #7352a tex 3840x2160 r32_typeless as d32f
+  render targets: null null null null null null null null
+  render targets: #8178a tex 3840x2160 rgba8_typeless as rgba8unorm
+  FULLSCREEN psbb8b8bf0 vs5d0fc680 draw 6 indices viewport 3840x2160 at 0,0 -> #8178a tex 3840x2160 rgba8_typeless as rgba8unorm
+      t0 = #31962 tex 512x512 fmt71 mips10
+      b0 = cb #20cce buf 8388608 +27136
+  render targets: null null null null null null null null
+  render targets: #8178a tex 3840x2160 rgba8_typeless as rgba8unorm depth #7352a tex 3840x2160 r32_typeless as d32f
+  render targets: null null null null null null null null
+  render targets: #8178a tex 3840x2160 rgba8_typeless as rgba8unorm depth #7352a tex 3840x2160 r32_typeless as d32f
+  render targets: null null null null null null null null
+  render targets: #85682 tex 3840x2160 rgba8_typeless as rgba8unorm
+  render targets: null null null null null null null null
+  render targets: #8178a tex 3840x2160 rgba8_typeless as rgba8unorm
+  render targets: null null null null null null null null
+  render targets: #65bfa tex 3840x2160 rgba16f as rgba16f
+  FULLSCREEN ps5047b69b vscdbcb30a draw 6 indices viewport 3840x2160 at 0,0 -> #65bfa tex 3840x2160 rgba16f as rgba16f
+      t0 = #8178a tex 3840x2160 rgba8_typeless as rgba8unorm
+      b0 = cb #20cce buf 8388608 +27648
+  render targets: null null null null null null null null
+  render targets: #7339e tex 3840x2160 r11g11b10f as r11g11b10f depth #733f6 tex 3840x2160 r32_typeless as d32f
+  FULLSCREEN ps5921bc7e vscdbcb30a draw 6 indices viewport 3840x2160 at 0,0 -> #7339e tex 3840x2160 r11g11b10f as r11g11b10f depth #733f6 tex 3840x2160 r32_typeless as d32f
+      t0 = #65bfa tex 3840x2160 rgba16f as rgba16f
+      b0 = cb #20cce buf 8388608 +28160
+  render targets: null null null null null null null null
+  render targets: #7339e tex 3840x2160 r11g11b10f as r11g11b10f depth #733f6 tex 3840x2160 r32_typeless as d32f
+  FULLSCREEN ps0b9c0da1 vsd87b6d28 draw 5 indices viewport 3840x2160 at 0,0 -> #7339e tex 3840x2160 r11g11b10f as r11g11b10f depth #733f6 tex 3840x2160 r32_typeless as d32f
+      t0 = #4dc72 tex 1024x1024 fmt98
+      b0 = cb #20cce buf 8388608 +28672
+  draw x1
+  FULLSCREEN ps0b9c0da1 vsd87b6d28 draw 5 indices viewport 3840x2160 at 0,0 -> #7339e tex 3840x2160 r11g11b10f as r11g11b10f depth #733f6 tex 3840x2160 r32_typeless as d32f
+      t0 = #94cda tex 1024x1024 fmt98
+      b0 = cb #20cce buf 8388608 +29696
+  FULLSCREEN ps0b9c0da1 vsd87b6d28 draw 5 indices viewport 3840x2160 at 0,0 -> #7339e tex 3840x2160 r11g11b10f as r11g11b10f depth #733f6 tex 3840x2160 r32_typeless as d32f
+      t0 = #80e9a tex 128x128 fmt98 mips8
+      b0 = cb #20cce buf 8388608 +30208
+  FULLSCREEN ps0b9c0da1 vsd87b6d28 draw 5 indices viewport 3840x2160 at 0,0 -> #7339e tex 3840x2160 r11g11b10f as r11g11b10f depth #733f6 tex 3840x2160 r32_typeless as d32f
+      t0 = #80f76 tex 64x256 fmt98 mips9
+      b0 = cb #20cce buf 8388608 +30720
+  FULLSCREEN ps0b9c0da1 vsd87b6d28 draw 5 indices viewport 3840x2160 at 0,0 -> #7339e tex 3840x2160 r11g11b10f as r11g11b10f depth #733f6 tex 3840x2160 r32_typeless as d32f
+      t0 = #8107e tex 64x256 fmt98 mips9
+      b0 = cb #20cce buf 8388608 +31232
+  FULLSCREEN ps0b9c0da1 vsd87b6d28 draw 5 indices viewport 3840x2160 at 0,0 -> #7339e tex 3840x2160 r11g11b10f as r11g11b10f depth #733f6 tex 3840x2160 r32_typeless as d32f
+      t0 = #810aa tex 64x256 fmt98 mips9
+      b0 = cb #20cce buf 8388608 +31744
+  FULLSCREEN ps0b9c0da1 vsd87b6d28 draw 5 indices viewport 3840x2160 at 0,0 -> #7339e tex 3840x2160 r11g11b10f as r11g11b10f depth #733f6 tex 3840x2160 r32_typeless as d32f
+      t0 = #d7e32 tex 256x256 fmt98 mips9
+      b0 = cb #20cce buf 8388608 +32256
+  FULLSCREEN ps0b9c0da1 vsd87b6d28 draw 5 indices viewport 3840x2160 at 0,0 -> #7339e tex 3840x2160 r11g11b10f as r11g11b10f depth #733f6 tex 3840x2160 r32_typeless as d32f
+      t0 = #94c82 tex 64x64 fmt98 mips7
+      b0 = cb #20cce buf 8388608 +32768
+  draw x4
+  FULLSCREEN ps0c3872c7 vs5d0fc680 draw 6 indices viewport 3840x2160 at 0,0 -> #7339e tex 3840x2160 r11g11b10f as r11g11b10f depth #733f6 tex 3840x2160 r32_typeless as d32f
+      t0 = #94ce2 tex 128x128 fmt98 mips8
+      b0 = cb #20cce buf 8388608 +35328
+  FULLSCREEN ps0b9c0da1 vsd87b6d28 draw 5 indices viewport 3840x2160 at 0,0 -> #7339e tex 3840x2160 r11g11b10f as r11g11b10f depth #733f6 tex 3840x2160 r32_typeless as d32f
+      t0 = #85c02 tex 32x32 fmt71
+      b0 = cb #20cce buf 8388608 +35840
+  FULLSCREEN ps0b9c0da1 vsd87b6d28 draw 5 indices viewport 3840x2160 at 0,0 -> #7339e tex 3840x2160 r11g11b10f as r11g11b10f depth #733f6 tex 3840x2160 r32_typeless as d32f
+      t0 = #85c02 tex 32x32 fmt71
+      b0 = cb #20cce buf 8388608 +36352
+  FULLSCREEN ps0b9c0da1 vsd87b6d28 draw 5 indices viewport 3840x2160 at 0,0 -> #7339e tex 3840x2160 r11g11b10f as r11g11b10f depth #733f6 tex 3840x2160 r32_typeless as d32f
+      t0 = #85c02 tex 32x32 fmt71
+      b0 = cb #20cce buf 8388608 +36352
+  FULLSCREEN ps671af796 vs5d0fc680 draw 6 indices viewport 3840x2160 at 0,0 -> #7339e tex 3840x2160 r11g11b10f as r11g11b10f depth #733f6 tex 3840x2160 r32_typeless as d32f
+      t0 = #985fa tex 1x1 fmt65
+      b0 = cb #20cce buf 8388608 +37120
+  draw x1
+  FULLSCREEN ps671af796 vs5d0fc680 draw 6 indices viewport 3840x2160 at 0,0 -> #7339e tex 3840x2160 r11g11b10f as r11g11b10f depth #733f6 tex 3840x2160 r32_typeless as d32f
+      t0 = #985fa tex 1x1 fmt65
+      b0 = cb #20cce buf 8388608 +38144
+  draw x1
+  FULLSCREEN ps671af796 vs5d0fc680 draw 6 indices viewport 3840x2160 at 0,0 -> #7339e tex 3840x2160 r11g11b10f as r11g11b10f depth #733f6 tex 3840x2160 r32_typeless as d32f
+      t0 = #985fa tex 1x1 fmt65
+      b0 = cb #20cce buf 8388608 +39168
+  draw x1
+  FULLSCREEN ps671af796 vs5d0fc680 draw 6 indices viewport 3840x2160 at 0,0 -> #7339e tex 3840x2160 r11g11b10f as r11g11b10f depth #733f6 tex 3840x2160 r32_typeless as d32f
+      t0 = #985fa tex 1x1 fmt65
+      b0 = cb #20cce buf 8388608 +40192
+  draw x3
+  FULLSCREEN ps671af796 vs5d0fc680 draw 6 indices viewport 3840x2160 at 0,0 -> #7339e tex 3840x2160 r11g11b10f as r11g11b10f depth #733f6 tex 3840x2160 r32_typeless as d32f
+      t0 = #985fa tex 1x1 fmt65
+      b0 = cb #20cce buf 8388608 +42240
+  draw x1
+  FULLSCREEN ps671af796 vs5d0fc680 draw 6 indices viewport 3840x2160 at 0,0 -> #7339e tex 3840x2160 r11g11b10f as r11g11b10f depth #733f6 tex 3840x2160 r32_typeless as d32f
+      t0 = #985fa tex 1x1 fmt65
+      b0 = cb #20cce buf 8388608 +43264
+  draw x1
+  FULLSCREEN ps671af796 vs5d0fc680 draw 6 indices viewport 3840x2160 at 0,0 -> #7339e tex 3840x2160 r11g11b10f as r11g11b10f depth #733f6 tex 3840x2160 r32_typeless as d32f
+      t0 = #985fa tex 1x1 fmt65
+      b0 = cb #20cce buf 8388608 +44288
+  draw x8
+  FULLSCREEN ps671af796 vs5d0fc680 draw 6 indices viewport 3840x2160 at 0,0 -> #7339e tex 3840x2160 r11g11b10f as r11g11b10f depth #733f6 tex 3840x2160 r32_typeless as d32f
+      t0 = #9867e tex 1x1 fmt65
+      b0 = cb #20cce buf 8388608 +48896
+  draw x1
+  FULLSCREEN ps671af796 vs5d0fc680 draw 6 indices viewport 3840x2160 at 0,0 -> #7339e tex 3840x2160 r11g11b10f as r11g11b10f depth #733f6 tex 3840x2160 r32_typeless as d32f
+      t0 = #9867e tex 1x1 fmt65
+      b0 = cb #20cce buf 8388608 +49920
+  draw x1
+  FULLSCREEN ps671af796 vs5d0fc680 draw 6 indices viewport 3840x2160 at 0,0 -> #7339e tex 3840x2160 r11g11b10f as r11g11b10f depth #733f6 tex 3840x2160 r32_typeless as d32f
+      t0 = #9867e tex 1x1 fmt65
+      b0 = cb #20cce buf 8388608 +50944
+  draw x1
+  FULLSCREEN ps671af796 vs5d0fc680 draw 6 indices viewport 3840x2160 at 0,0 -> #7339e tex 3840x2160 r11g11b10f as r11g11b10f depth #733f6 tex 3840x2160 r32_typeless as d32f
+      t0 = #9867e tex 1x1 fmt65
+      b0 = cb #20cce buf 8388608 +51968
+  draw x3
+  FULLSCREEN ps671af796 vs5d0fc680 draw 6 indices viewport 3840x2160 at 0,0 -> #7339e tex 3840x2160 r11g11b10f as r11g11b10f depth #733f6 tex 3840x2160 r32_typeless as d32f
+      t0 = #9867e tex 1x1 fmt65
+      b0 = cb #20cce buf 8388608 +54016
+  draw x1
+  FULLSCREEN ps671af796 vs5d0fc680 draw 6 indices viewport 3840x2160 at 0,0 -> #7339e tex 3840x2160 r11g11b10f as r11g11b10f depth #733f6 tex 3840x2160 r32_typeless as d32f
+      t0 = #9867e tex 1x1 fmt65
+      b0 = cb #20cce buf 8388608 +55040
+  draw x1
+  FULLSCREEN ps671af796 vs5d0fc680 draw 6 indices viewport 3840x2160 at 0,0 -> #7339e tex 3840x2160 r11g11b10f as r11g11b10f depth #733f6 tex 3840x2160 r32_typeless as d32f
+      t0 = #9867e tex 1x1 fmt65
+      b0 = cb #20cce buf 8388608 +56064
+  draw x8
+  FULLSCREEN ps0c3872c7 vs5d0fc680 draw 6 indices viewport 3840x2160 at 0,0 -> #7339e tex 3840x2160 r11g11b10f as r11g11b10f depth #733f6 tex 3840x2160 r32_typeless as d32f
+      t0 = #2ecce tex 128x128 fmt98 mips8
+      b0 = cb #20cce buf 8388608 +60672
+  FULLSCREEN ps671af796 vs5d0fc680 draw 6 indices viewport 3840x2160 at 0,0 -> #7339e tex 3840x2160 r11g11b10f as r11g11b10f depth #733f6 tex 3840x2160 r32_typeless as d32f
+      t0 = #57bb6 tex 39x31 fmt65
+      b0 = cb #20cce buf 8388608 +61184
+  FULLSCREEN ps0c3872c7 vs5d0fc680 draw 6 indices viewport 3840x2160 at 0,0 -> #7339e tex 3840x2160 r11g11b10f as r11g11b10f depth #733f6 tex 3840x2160 r32_typeless as d32f
+      t0 = #2ecce tex 128x128 fmt98 mips8
+      b0 = cb #20cce buf 8388608 +61696
+  FULLSCREEN ps671af796 vs5d0fc680 draw 6 indices viewport 3840x2160 at 0,0 -> #7339e tex 3840x2160 r11g11b10f as r11g11b10f depth #733f6 tex 3840x2160 r32_typeless as d32f
+      t0 = #5789e tex 32x32 fmt65
+      b0 = cb #20cce buf 8388608 +62208
+  FULLSCREEN ps0c3872c7 vs5d0fc680 draw 6 indices viewport 3840x2160 at 0,0 -> #7339e tex 3840x2160 r11g11b10f as r11g11b10f depth #733f6 tex 3840x2160 r32_typeless as d32f
+      t0 = #2ecce tex 128x128 fmt98 mips8
+      b0 = cb #20cce buf 8388608 +62720
+  FULLSCREEN ps671af796 vs5d0fc680 draw 6 indices viewport 3840x2160 at 0,0 -> #7339e tex 3840x2160 r11g11b10f as r11g11b10f depth #733f6 tex 3840x2160 r32_typeless as d32f
+      t0 = #57aae tex 28x31 fmt65
+      b0 = cb #20cce buf 8388608 +63232
+  FULLSCREEN ps0c3872c7 vs5d0fc680 draw 6 indices viewport 3840x2160 at 0,0 -> #7339e tex 3840x2160 r11g11b10f as r11g11b10f depth #733f6 tex 3840x2160 r32_typeless as d32f
+      t0 = #2ecce tex 128x128 fmt98 mips8
+      b0 = cb #20cce buf 8388608 +63744
+  FULLSCREEN ps671af796 vs5d0fc680 draw 6 indices viewport 3840x2160 at 0,0 -> #7339e tex 3840x2160 r11g11b10f as r11g11b10f depth #733f6 tex 3840x2160 r32_typeless as d32f
+      t0 = #579fe tex 26x33 fmt65
+      b0 = cb #20cce buf 8388608 +64256
+  FULLSCREEN ps0c3872c7 vs5d0fc680 draw 6 indices viewport 3840x2160 at 0,0 -> #7339e tex 3840x2160 r11g11b10f as r11g11b10f depth #733f6 tex 3840x2160 r32_typeless as d32f
+      t0 = #2ecce tex 128x128 fmt98 mips8
+      b0 = cb #20cce buf 8388608 +64768
+  FULLSCREEN ps671af796 vs5d0fc680 draw 6 indices viewport 3840x2160 at 0,0 -> #7339e tex 3840x2160 r11g11b10f as r11g11b10f depth #733f6 tex 3840x2160 r32_typeless as d32f
+      t0 = #57c0e tex 8x32 fmt65
+      b0 = cb #20cce buf 8388608 +65280
+  FULLSCREEN ps0c3872c7 vs5d0fc680 draw 6 indices viewport 3840x2160 at 0,0 -> #7339e tex 3840x2160 r11g11b10f as r11g11b10f depth #733f6 tex 3840x2160 r32_typeless as d32f
+      t0 = #2ecce tex 128x128 fmt98 mips8
+      b0 = cb #20cce buf 8388608 +65792
+  FULLSCREEN ps671af796 vs5d0fc680 draw 6 indices viewport 3840x2160 at 0,0 -> #7339e tex 3840x2160 r11g11b10f as r11g11b10f depth #733f6 tex 3840x2160 r32_typeless as d32f
+      t0 = #57a56 tex 17x32 fmt65
+      b0 = cb #20cce buf 8388608 +66304
+  FULLSCREEN ps0c3872c7 vs5d0fc680 draw 6 indices viewport 3840x2160 at 0,0 -> #7339e tex 3840x2160 r11g11b10f as r11g11b10f depth #733f6 tex 3840x2160 r32_typeless as d32f
+      t0 = #2ecce tex 128x128 fmt98 mips8
+      b0 = cb #20cce buf 8388608 +66816
+  FULLSCREEN ps671af796 vs5d0fc680 draw 6 indices viewport 3840x2160 at 0,0 -> #7339e tex 3840x2160 r11g11b10f as r11g11b10f depth #733f6 tex 3840x2160 r32_typeless as d32f
+      t0 = #57cbe tex 22x32 fmt65
+      b0 = cb #20cce buf 8388608 +67328
+  FULLSCREEN ps0c3872c7 vs5d0fc680 draw 6 indices viewport 3840x2160 at 0,0 -> #7339e tex 3840x2160 r11g11b10f as r11g11b10f depth #733f6 tex 3840x2160 r32_typeless as d32f
+      t0 = #2ecce tex 128x128 fmt98 mips8
+      b0 = cb #20cce buf 8388608 +67840
+  FULLSCREEN ps671af796 vs5d0fc680 draw 6 indices viewport 3840x2160 at 0,0 -> #7339e tex 3840x2160 r11g11b10f as r11g11b10f depth #733f6 tex 3840x2160 r32_typeless as d32f
+      t0 = #57df2 tex 27x32 fmt65
+      b0 = cb #20cce buf 8388608 +68352
+  FULLSCREEN ps0c3872c7 vs5d0fc680 draw 6 indices viewport 3840x2160 at 0,0 -> #7339e tex 3840x2160 r11g11b10f as r11g11b10f depth #733f6 tex 3840x2160 r32_typeless as d32f
+      t0 = #2ecce tex 128x128 fmt98 mips8
+      b0 = cb #20cce buf 8388608 +68864
+  FULLSCREEN ps671af796 vs5d0fc680 draw 6 indices viewport 3840x2160 at 0,0 -> #7339e tex 3840x2160 r11g11b10f as r11g11b10f depth #733f6 tex 3840x2160 r32_typeless as d32f
+      t0 = #5805a tex 29x32 fmt65
+      b0 = cb #20cce buf 8388608 +69376
+  FULLSCREEN ps0c3872c7 vs5d0fc680 draw 6 indices viewport 3840x2160 at 0,0 -> #7339e tex 3840x2160 r11g11b10f as r11g11b10f depth #733f6 tex 3840x2160 r32_typeless as d32f
+      t0 = #2ecce tex 128x128 fmt98 mips8
+      b0 = cb #20cce buf 8388608 +69888
+  FULLSCREEN ps671af796 vs5d0fc680 draw 6 indices viewport 3840x2160 at 0,0 -> #7339e tex 3840x2160 r11g11b10f as r11g11b10f depth #733f6 tex 3840x2160 r32_typeless as d32f
+      t0 = #580b2 tex 28x33 fmt65
+      b0 = cb #20cce buf 8388608 +70400
+  FULLSCREEN ps0c3872c7 vs5d0fc680 draw 6 indices viewport 3840x2160 at 0,0 -> #7339e tex 3840x2160 r11g11b10f as r11g11b10f depth #733f6 tex 3840x2160 r32_typeless as d32f
+      t0 = #92bda tex 128x128 fmt98 mips8
+      b0 = cb #20cce buf 8388608 +70912
+  FULLSCREEN ps0b9c0da1 vsd87b6d28 draw 5 indices viewport 3840x2160 at 0,0 -> #7339e tex 3840x2160 r11g11b10f as r11g11b10f depth #733f6 tex 3840x2160 r32_typeless as d32f
+      t0 = #85c02 tex 32x32 fmt71
+      b0 = cb #20cce buf 8388608 +71424
+  FULLSCREEN ps0b9c0da1 vsd87b6d28 draw 5 indices viewport 3840x2160 at 0,0 -> #7339e tex 3840x2160 r11g11b10f as r11g11b10f depth #733f6 tex 3840x2160 r32_typeless as d32f
+      t0 = #85c02 tex 32x32 fmt71
+      b0 = cb #20cce buf 8388608 +71424
+  FULLSCREEN ps0b9c0da1 vsd87b6d28 draw 5 indices viewport 3840x2160 at 0,0 -> #7339e tex 3840x2160 r11g11b10f as r11g11b10f depth #733f6 tex 3840x2160 r32_typeless as d32f
+      t0 = #85c02 tex 32x32 fmt71
+      b0 = cb #20cce buf 8388608 +72192
+  FULLSCREEN ps0b9c0da1 vsd87b6d28 draw 5 indices viewport 3840x2160 at 0,0 -> #7339e tex 3840x2160 r11g11b10f as r11g11b10f depth #733f6 tex 3840x2160 r32_typeless as d32f
+      t0 = #85c02 tex 32x32 fmt71
+      b0 = cb #20cce buf 8388608 +72704
+  draw x9
+  FULLSCREEN psb4f1363b vs402b7cbd draw 6 indices viewport 3840x2160 at 0,0 -> #7339e tex 3840x2160 r11g11b10f as r11g11b10f depth #733f6 tex 3840x2160 r32_typeless as d32f
+      b0 = cb #20cce buf 8388608 +76288
+  FULLSCREEN psb4f1363b vs402b7cbd draw 6 indices viewport 3840x2160 at 0,0 -> #7339e tex 3840x2160 r11g11b10f as r11g11b10f depth #733f6 tex 3840x2160 r32_typeless as d32f
+      b0 = cb #20cce buf 8388608 +76800
+  resolve #7339e tex 3840x2160 r11g11b10f -> #81baa tex 3840x2160 r11g11b10f
+  render targets: null null null null null null null null
+  render targets: #81baa tex 3840x2160 r11g11b10f as r11g11b10f depth #73582 tex 3840x2160 r32_typeless as d32f
+  render targets: null null null null null null null null
+  render targets: #73346 tex 3840x2160 rgb10a2_typeless as rgb10a2unorm
+  FULLSCREEN ps546df055 vscdbcb30a draw 6 indices viewport 3840x2160 at 0,0 -> #73346 tex 3840x2160 rgb10a2_typeless as rgb10a2unorm
+      t0 = #81baa tex 3840x2160 r11g11b10f as r11g11b10f
+      b0 = cb #20cce buf 8388608 +77312
+  render targets: null null null null null null null null
+  render targets: #612ae tex 3840x2160 rgb10a2unorm depth #0e36e tex 3840x2160 d32f as d32f
+  FULLSCREEN psaef3f639 vscdbcb30a draw 6 indices viewport 3840x2160 at 0,0 -> #612ae tex 3840x2160 rgb10a2unorm depth #0e36e tex 3840x2160 d32f as d32f
+      t0 = #73346 tex 3840x2160 rgb10a2_typeless as rgb10a2unorm
+      b0 = cb #20cce buf 8388608 +77824
+---- deferred context C8, 5 events not yet in a command list
+---- deferred context C2, 9 events not yet in a command list
+---- deferred context C9, 18 events not yet in a command list
+---- deferred context C6, 3 events not yet in a command list
+---- deferred context C3, 19 events not yet in a command list
+---- deferred context C4, 39 events not yet in a command list
+---- deferred context C10, 8 events not yet in a command list
+---- deferred context C11, 3 events not yet in a command list
+---- deferred context C12, 47 events not yet in a command list
+---- deferred context C13, 2 events not yet in a command list
+---- deferred context C14, 11 events not yet in a command list
+---- deferred context C15, 15 events not yet in a command list
+---- deferred context C16, 2 events not yet in a command list
+==== PRESENT (back buffer #612ae tex 3840x2160 rgb10a2unorm), 1 more
+---- immediate context C1, 391 events
+  render targets: null null null null null null null null
+  render targets: null null null null null null null null
+  render targets: #8115a tex 3840x2160 r11g11b10f as r11g11b10f depth #7352a tex 3840x2160 r32_typeless as d32f
+  render targets: null null null null null null null null
+  render targets: #8115a tex 3840x2160 r11g11b10f as r11g11b10f depth #7352a tex 3840x2160 r32_typeless as d32f
+  render targets: null null null null null null null null
+  render targets: #811b2 tex 3840x2160 r11g11b10f as r11g11b10f #7c8fe tex 3840x2160 fmt9 as rgba16f #7cb0e tex 3840x2160 r32_typeless as r32f
+  FULLSCREEN ps40e6b08f vs58264f20 draw 6 indices viewport 3840x2160 at 0,0 -> #811b2 tex 3840x2160 r11g11b10f as r11g11b10f #7c8fe tex 3840x2160 fmt9 as rgba16f #7cb0e tex 3840x2160 r32_typeless as r32f
+      t0 = #8115a tex 3840x2160 r11g11b10f as r11g11b10f
+      t1 = #7331a tex 3840x2160 r32_typeless as r32f
+      t2 = #6610a tex 3840x2160 fmt9 as rgba16f
+      t3 = #66136 tex 3840x2160 r32_typeless as r32f
+      t4 = #734fe tex 3840x2160 rg8uint as rg8uint
+      b0 = cb #614be buf 8388608 +8960
+  render targets: null null null null null null null null
+  clear #63eae tex 1920x1080 r11g11b10f as r11g11b10f to 0 0 0 0
+  render targets: #63eae tex 1920x1080 r11g11b10f as r11g11b10f depth #63fb6 tex 1920x1080 r32_typeless as d32f
+  render targets: null null null null null null null null
+  render targets: #811b2 tex 3840x2160 r11g11b10f as r11g11b10f
+  FULLSCREEN ps5921bc7e vscdbcb30a draw 6 indices viewport 3840x2160 at 0,0 -> #811b2 tex 3840x2160 r11g11b10f as r11g11b10f
+      t0 = #63eae tex 1920x1080 r11g11b10f as r11g11b10f
+      b0 = cb #614be buf 8388608 +9728
+  render targets: null null null null null null null null
+  render targets: #816da tex 3840x2160 r11g11b10f as r11g11b10f
+  FULLSCREEN psfc17c302 vscdbcb30a draw 6 indices viewport 3840x2160 at 0,0 -> #816da tex 3840x2160 r11g11b10f as r11g11b10f
+      t0 = #811b2 tex 3840x2160 r11g11b10f as r11g11b10f
+      b0 = cb #614be buf 8388608 +10240
+  render targets: null null null null null null null null
+  render targets: #816da tex 3840x2160 r11g11b10f as r11g11b10f depth #7352a tex 3840x2160 r32_typeless as d32f
+  render targets: null null null null null null null null
+  render targets: #65db2 tex 3840x2160 r11g11b10f as r11g11b10f
+  FULLSCREEN ps49dc83e9 vscdbcb30a draw 6 indices viewport 3840x2160 at 0,0 -> #65db2 tex 3840x2160 r11g11b10f as r11g11b10f
+      t0 = #816da tex 3840x2160 r11g11b10f as r11g11b10f
+      t1 = #734a6 tex 3840x2160 r11g11b10f as r11g11b10f
+      t2 = #8549e tex 3840x2160 rgb10a2_typeless as rgb10a2unorm
+      b0 = cb #614be buf 8388608 +10752
+  render targets: null null null null null null null null
+  render targets: #81396 tex 3840x2160 r11g11b10f as r11g11b10f
+  FULLSCREEN ps77251554 vs58264f20 draw 6 indices viewport 3840x2160 at 0,0 -> #81396 tex 3840x2160 r11g11b10f as r11g11b10f
+      t0 = #65db2 tex 3840x2160 r11g11b10f as r11g11b10f
+      b0 = cb #614be buf 8388608 +11264
+  render targets: null null null null null null null null
+  render targets: #81baa tex 3840x2160 r11g11b10f as r11g11b10f
+  FULLSCREEN ps77251554 vs58264f20 draw 6 indices viewport 3840x2160 at 0,0 -> #81baa tex 3840x2160 r11g11b10f as r11g11b10f
+      t0 = #81396 tex 3840x2160 r11g11b10f as r11g11b10f
+      b0 = cb #614be buf 8388608 +12032
+  render targets: null null null null null null null null
+  render targets: #80ffa tex 3840x2160 r11g11b10f as r11g11b10f
+  FULLSCREEN ps77251554 vs58264f20 draw 6 indices viewport 3840x2160 at 0,0 -> #80ffa tex 3840x2160 r11g11b10f as r11g11b10f
+      t0 = #81baa tex 3840x2160 r11g11b10f as r11g11b10f
+      b0 = cb #614be buf 8388608 +12800
+  render targets: null null null null null null null null
+  render targets: #80f1e tex 1920x1080 r11g11b10f as r11g11b10f
+  FULLSCREEN ps77251554 vs58264f20 draw 6 indices viewport 1920x1080 at 0,0 -> #80f1e tex 1920x1080 r11g11b10f as r11g11b10f
+      t0 = #80ffa tex 3840x2160 r11g11b10f as r11g11b10f
+      b0 = cb #614be buf 8388608 +13568
+  render targets: null null null null null null null null
+  render targets: #810d6 tex 1920x1080 r11g11b10f as r11g11b10f
+  FULLSCREEN ps77251554 vs58264f20 draw 6 indices viewport 1920x1080 at 0,0 -> #810d6 tex 1920x1080 r11g11b10f as r11g11b10f
+      t0 = #80f1e tex 1920x1080 r11g11b10f as r11g11b10f
+      b0 = cb #614be buf 8388608 +14336
+  render targets: null null null null null null null null
+  render targets: #81262 tex 960x540 r11g11b10f as r11g11b10f
+  FULLSCREEN ps77251554 vs58264f20 draw 6 indices viewport 960x540 at 0,0 -> #81262 tex 960x540 r11g11b10f as r11g11b10f
+      t0 = #810d6 tex 1920x1080 r11g11b10f as r11g11b10f
+      b0 = cb #614be buf 8388608 +15104
+  render targets: null null null null null null null null
+  render targets: #80e6e tex 960x540 r11g11b10f as r11g11b10f
+  FULLSCREEN ps77251554 vs58264f20 draw 6 indices viewport 960x540 at 0,0 -> #80e6e tex 960x540 r11g11b10f as r11g11b10f
+      t0 = #81262 tex 960x540 r11g11b10f as r11g11b10f
+      b0 = cb #614be buf 8388608 +15872
+  render targets: null null null null null null null null
+  render targets: #812e6 tex 480x270 r11g11b10f as r11g11b10f
+  FULLSCREEN ps77251554 vs58264f20 draw 6 indices viewport 480x270 at 0,0 -> #812e6 tex 480x270 r11g11b10f as r11g11b10f
+      t0 = #80e6e tex 960x540 r11g11b10f as r11g11b10f
+      b0 = cb #614be buf 8388608 +16640
+  render targets: null null null null null null null null
+  render targets: #813ee tex 480x270 r11g11b10f as r11g11b10f
+  FULLSCREEN ps77251554 vs58264f20 draw 6 indices viewport 480x270 at 0,0 -> #813ee tex 480x270 r11g11b10f as r11g11b10f
+      t0 = #812e6 tex 480x270 r11g11b10f as r11g11b10f
+      b0 = cb #614be buf 8388608 +17408
+  render targets: null null null null null null null null
+  render targets: #81312 tex 240x135 r11g11b10f as r11g11b10f
+  FULLSCREEN ps77251554 vs58264f20 draw 6 indices viewport 240x135 at 0,0 -> #81312 tex 240x135 r11g11b10f as r11g11b10f
+      t0 = #813ee tex 480x270 r11g11b10f as r11g11b10f
+      b0 = cb #614be buf 8388608 +18176
+  render targets: null null null null null null null null
+  render targets: #734a6 tex 3840x2160 r11g11b10f as r11g11b10f
+  FULLSCREEN pse3003a93 vscdbcb30a draw 6 indices viewport 3840x2160 at 0,0 -> #734a6 tex 3840x2160 r11g11b10f as r11g11b10f
+      t1 = #81baa tex 3840x2160 r11g11b10f as r11g11b10f
+      t2 = #80f1e tex 1920x1080 r11g11b10f as r11g11b10f
+      t3 = #81262 tex 960x540 r11g11b10f as r11g11b10f
+      t4 = #812e6 tex 480x270 r11g11b10f as r11g11b10f
+      t5 = #81312 tex 240x135 r11g11b10f as r11g11b10f
+      b0 = cb #614be buf 8388608 +18944
+  render targets: null null null null null null null null
+  render targets: #816da tex 3840x2160 r11g11b10f as r11g11b10f
+  FULLSCREEN ps5921bc7e vscdbcb30a draw 6 indices viewport 3840x2160 at 0,0 -> #816da tex 3840x2160 r11g11b10f as r11g11b10f
+      t0 = #734a6 tex 3840x2160 r11g11b10f as r11g11b10f
+      b0 = cb #614be buf 8388608 +19456
+  render targets: null null null null null null null null
+  render targets: #73372 tex 3840x2160 r11g11b10f as r11g11b10f
+  FULLSCREEN ps5921bc7e vscdbcb30a draw 6 indices viewport 3840x2160 at 0,0 -> #73372 tex 3840x2160 r11g11b10f as r11g11b10f
+      t0 = #816da tex 3840x2160 r11g11b10f as r11g11b10f
+      b0 = cb #614be buf 8388608 +19968
+  render targets: null null null null null null null null
+  render targets: #7344e tex 3840x2160 rg8uint as rg8uint
+  FULLSCREEN ps04ab0c87 vscdbcb30a draw 6 indices viewport 3840x2160 at 0,0 -> #7344e tex 3840x2160 rg8uint as rg8uint
+      t0 = #734fe tex 3840x2160 rg8uint as rg8uint
+  render targets: null null null null null null null null
+  render targets: #735da tex 3840x2160 r16f as r16f
+  FULLSCREEN psc88c1477 vscdbcb30a draw 6 indices viewport 3840x2160 at 0,0 -> #735da tex 3840x2160 r16f as r16f
+      t0 = #7352a tex 3840x2160 r32_typeless as r32f
+      b0 = cb #614be buf 8388608 +20736
+  render targets: null null null null null null null null
+  render targets: #81236 tex 1920x1080 r11g11b10f as r11g11b10f
+  FULLSCREEN ps8c16417c vscdbcb30a draw 6 indices viewport 1920x1080 at 0,0 -> #81236 tex 1920x1080 r11g11b10f as r11g11b10f
+      t0 = #816da tex 3840x2160 r11g11b10f as r11g11b10f
+  render targets: null null null null null null null null
+  render targets: #810d6 tex 1920x1080 r11g11b10f as r11g11b10f
+  FULLSCREEN psb4728940 vsd413ba5c draw 6 indices viewport 1920x1080 at 0,0 -> #810d6 tex 1920x1080 r11g11b10f as r11g11b10f
+      t0 = #81236 tex 1920x1080 r11g11b10f as r11g11b10f
+      b0 = cb #614be buf 8388608 +21504
+  render targets: null null null null null null null null
+  render targets: #80f1e tex 1920x1080 r11g11b10f as r11g11b10f
+  FULLSCREEN psb4728940 vsd413ba5c draw 6 indices viewport 1920x1080 at 0,0 -> #80f1e tex 1920x1080 r11g11b10f as r11g11b10f
+      t0 = #810d6 tex 1920x1080 r11g11b10f as r11g11b10f
+      b0 = cb #614be buf 8388608 +22016
+  render targets: null null null null null null null null
+  render targets: #81236 tex 1920x1080 r11g11b10f as r11g11b10f
+  FULLSCREEN ps40cfd35e vs58264f20 draw 6 indices viewport 1920x1080 at 0,0 -> #81236 tex 1920x1080 r11g11b10f as r11g11b10f
+      t0 = #816da tex 3840x2160 r11g11b10f as r11g11b10f
+      t1 = #80f1e tex 1920x1080 r11g11b10f as r11g11b10f
+      b0 = cb #614be buf 8388608 +22528
+  render targets: null null null null null null null null
+  render targets: #8115a tex 3840x2160 r11g11b10f as r11g11b10f
+  FULLSCREEN ps5921bc7e vscdbcb30a draw 6 indices viewport 3840x2160 at 0,0 -> #8115a tex 3840x2160 r11g11b10f as r11g11b10f
+      t0 = #816da tex 3840x2160 r11g11b10f as r11g11b10f
+      b0 = cb #614be buf 8388608 +23040
+  render targets: null null null null null null null null
+  render targets: #8115a tex 3840x2160 r11g11b10f as r11g11b10f
+  FULLSCREEN ps5921bc7e vscdbcb30a draw 6 indices viewport 3840x2160 at 0,0 -> #8115a tex 3840x2160 r11g11b10f as r11g11b10f
+      t0 = #81236 tex 1920x1080 r11g11b10f as r11g11b10f
+      b0 = cb #614be buf 8388608 +23552
+  render targets: null null null null null null null null
+  render targets: #81236 tex 1920x1080 r11g11b10f as r11g11b10f
+  FULLSCREEN ps8c16417c vscdbcb30a draw 6 indices viewport 1920x1080 at 0,0 -> #81236 tex 1920x1080 r11g11b10f as r11g11b10f
+      t0 = #8115a tex 3840x2160 r11g11b10f as r11g11b10f
+  render targets: null null null null null null null null
+  render targets: #810d6 tex 1920x1080 r11g11b10f as r11g11b10f
+  FULLSCREEN psb4728940 vsb00e9ce9 draw 6 indices viewport 1920x1080 at 0,0 -> #810d6 tex 1920x1080 r11g11b10f as r11g11b10f
+      t0 = #81236 tex 1920x1080 r11g11b10f as r11g11b10f
+      b0 = cb #614be buf 8388608 +24320
+  render targets: null null null null null null null null
+  render targets: #80f1e tex 1920x1080 r11g11b10f as r11g11b10f
+  FULLSCREEN psb4728940 vsb00e9ce9 draw 6 indices viewport 1920x1080 at 0,0 -> #80f1e tex 1920x1080 r11g11b10f as r11g11b10f
+      t0 = #810d6 tex 1920x1080 r11g11b10f as r11g11b10f
+      b0 = cb #614be buf 8388608 +24832
+  render targets: null null null null null null null null
+  render targets: #811b2 tex 3840x2160 r11g11b10f as r11g11b10f
+  FULLSCREEN ps5921bc7e vscdbcb30a draw 6 indices viewport 3840x2160 at 0,0 -> #811b2 tex 3840x2160 r11g11b10f as r11g11b10f
+      t0 = #8115a tex 3840x2160 r11g11b10f as r11g11b10f
+      b0 = cb #614be buf 8388608 +25344
+  render targets: null null null null null null null null
+  render targets: #811b2 tex 3840x2160 r11g11b10f as r11g11b10f
+  FULLSCREEN ps5921bc7e vscdbcb30a draw 6 indices viewport 3840x2160 at 0,0 -> #811b2 tex 3840x2160 r11g11b10f as r11g11b10f
+      t0 = #80f1e tex 1920x1080 r11g11b10f as r11g11b10f
+      b0 = cb #614be buf 8388608 +25856
+  render targets: null null null null null null null null
+  render targets: #81396 tex 3840x2160 r11g11b10f as r11g11b10f
+  FULLSCREEN pseb20620b vscdbcb30a draw 6 indices viewport 3840x2160 at 0,0 -> #81396 tex 3840x2160 r11g11b10f as r11g11b10f
+      t0 = #811b2 tex 3840x2160 r11g11b10f as r11g11b10f
+      b0 = cb #614be buf 8388608 +26368
+  render targets: null null null null null null null null
+  render targets: #817b6 tex 3840x2160 rgba8_typeless as rgba8unorm
+  FULLSCREEN psf2011a7b vscdbcb30a draw 6 indices viewport 3840x2160 at 0,0 -> #817b6 tex 3840x2160 rgba8_typeless as rgba8unorm
+      t0 = #81396 tex 3840x2160 r11g11b10f as r11g11b10f
+  render targets: null null null null null null null null
+  render targets: #817b6 tex 3840x2160 rgba8_typeless as rgba8unorm depth #7352a tex 3840x2160 r32_typeless as d32f
+  render targets: null null null null null null null null
+  render targets: #817b6 tex 3840x2160 rgba8_typeless as rgba8unorm
+  FULLSCREEN psbb8b8bf0 vs5d0fc680 draw 6 indices viewport 3840x2160 at 0,0 -> #817b6 tex 3840x2160 rgba8_typeless as rgba8unorm
+      t0 = #31962 tex 512x512 fmt71 mips10
+      b0 = cb #614be buf 8388608 +27136
+  render targets: null null null null null null null null
+  render targets: #817b6 tex 3840x2160 rgba8_typeless as rgba8unorm depth #7352a tex 3840x2160 r32_typeless as d32f
+  render targets: null null null null null null null null
+  render targets: #817b6 tex 3840x2160 rgba8_typeless as rgba8unorm depth #7352a tex 3840x2160 r32_typeless as d32f
+  render targets: null null null null null null null null
+  render targets: #85682 tex 3840x2160 rgba8_typeless as rgba8unorm
+  render targets: null null null null null null null null
+  render targets: #817b6 tex 3840x2160 rgba8_typeless as rgba8unorm
+  render targets: null null null null null null null null
+  render targets: #65caa tex 3840x2160 rgba16f as rgba16f
+  FULLSCREEN ps5047b69b vscdbcb30a draw 6 indices viewport 3840x2160 at 0,0 -> #65caa tex 3840x2160 rgba16f as rgba16f
+      t0 = #817b6 tex 3840x2160 rgba8_typeless as rgba8unorm
+      b0 = cb #614be buf 8388608 +27648
+  render targets: null null null null null null null null
+  render targets: #7339e tex 3840x2160 r11g11b10f as r11g11b10f depth #733f6 tex 3840x2160 r32_typeless as d32f
+  FULLSCREEN ps5921bc7e vscdbcb30a draw 6 indices viewport 3840x2160 at 0,0 -> #7339e tex 3840x2160 r11g11b10f as r11g11b10f depth #733f6 tex 3840x2160 r32_typeless as d32f
+      t0 = #65caa tex 3840x2160 rgba16f as rgba16f
+      b0 = cb #614be buf 8388608 +28160
+  render targets: null null null null null null null null
+  render targets: #7339e tex 3840x2160 r11g11b10f as r11g11b10f depth #733f6 tex 3840x2160 r32_typeless as d32f
+  FULLSCREEN ps0b9c0da1 vsd87b6d28 draw 5 indices viewport 3840x2160 at 0,0 -> #7339e tex 3840x2160 r11g11b10f as r11g11b10f depth #733f6 tex 3840x2160 r32_typeless as d32f
+      t0 = #4dc72 tex 1024x1024 fmt98
+      b0 = cb #614be buf 8388608 +28672
+  draw x1
+  FULLSCREEN ps0b9c0da1 vsd87b6d28 draw 5 indices viewport 3840x2160 at 0,0 -> #7339e tex 3840x2160 r11g11b10f as r11g11b10f depth #733f6 tex 3840x2160 r32_typeless as d32f
+      t0 = #94cda tex 1024x1024 fmt98
+      b0 = cb #614be buf 8388608 +29696
+  FULLSCREEN ps0b9c0da1 vsd87b6d28 draw 5 indices viewport 3840x2160 at 0,0 -> #7339e tex 3840x2160 r11g11b10f as r11g11b10f depth #733f6 tex 3840x2160 r32_typeless as d32f
+      t0 = #80e9a tex 128x128 fmt98 mips8
+      b0 = cb #614be buf 8388608 +30208
+  FULLSCREEN ps0b9c0da1 vsd87b6d28 draw 5 indices viewport 3840x2160 at 0,0 -> #7339e tex 3840x2160 r11g11b10f as r11g11b10f depth #733f6 tex 3840x2160 r32_typeless as d32f
+      t0 = #80f76 tex 64x256 fmt98 mips9
+      b0 = cb #614be buf 8388608 +30720
+  FULLSCREEN ps0b9c0da1 vsd87b6d28 draw 5 indices viewport 3840x2160 at 0,0 -> #7339e tex 3840x2160 r11g11b10f as r11g11b10f depth #733f6 tex 3840x2160 r32_typeless as d32f
+      t0 = #8107e tex 64x256 fmt98 mips9
+      b0 = cb #614be buf 8388608 +31232
+  FULLSCREEN ps0b9c0da1 vsd87b6d28 draw 5 indices viewport 3840x2160 at 0,0 -> #7339e tex 3840x2160 r11g11b10f as r11g11b10f depth #733f6 tex 3840x2160 r32_typeless as d32f
+      t0 = #810aa tex 64x256 fmt98 mips9
+      b0 = cb #614be buf 8388608 +31744
+  FULLSCREEN ps0b9c0da1 vsd87b6d28 draw 5 indices viewport 3840x2160 at 0,0 -> #7339e tex 3840x2160 r11g11b10f as r11g11b10f depth #733f6 tex 3840x2160 r32_typeless as d32f
+      t0 = #d7e32 tex 256x256 fmt98 mips9
+      b0 = cb #614be buf 8388608 +32256
+  FULLSCREEN ps0b9c0da1 vsd87b6d28 draw 5 indices viewport 3840x2160 at 0,0 -> #7339e tex 3840x2160 r11g11b10f as r11g11b10f depth #733f6 tex 3840x2160 r32_typeless as d32f
+      t0 = #94c82 tex 64x64 fmt98 mips7
+      b0 = cb #614be buf 8388608 +32768
+  draw x4
+  FULLSCREEN ps0c3872c7 vs5d0fc680 draw 6 indices viewport 3840x2160 at 0,0 -> #7339e tex 3840x2160 r11g11b10f as r11g11b10f depth #733f6 tex 3840x2160 r32_typeless as d32f
+      t0 = #94ce2 tex 128x128 fmt98 mips8
+      b0 = cb #614be buf 8388608 +35328
+  FULLSCREEN ps0b9c0da1 vsd87b6d28 draw 5 indices viewport 3840x2160 at 0,0 -> #7339e tex 3840x2160 r11g11b10f as r11g11b10f depth #733f6 tex 3840x2160 r32_typeless as d32f
+      t0 = #85c02 tex 32x32 fmt71
+      b0 = cb #614be buf 8388608 +35840
+  FULLSCREEN ps0b9c0da1 vsd87b6d28 draw 5 indices viewport 3840x2160 at 0,0 -> #7339e tex 3840x2160 r11g11b10f as r11g11b10f depth #733f6 tex 3840x2160 r32_typeless as d32f
+      t0 = #85c02 tex 32x32 fmt71
+      b0 = cb #614be buf 8388608 +36352
+  FULLSCREEN ps0b9c0da1 vsd87b6d28 draw 5 indices viewport 3840x2160 at 0,0 -> #7339e tex 3840x2160 r11g11b10f as r11g11b10f depth #733f6 tex 3840x2160 r32_typeless as d32f
+      t0 = #85c02 tex 32x32 fmt71
+      b0 = cb #614be buf 8388608 +36352
+  FULLSCREEN ps671af796 vs5d0fc680 draw 6 indices viewport 3840x2160 at 0,0 -> #7339e tex 3840x2160 r11g11b10f as r11g11b10f depth #733f6 tex 3840x2160 r32_typeless as d32f
+      t0 = #985fa tex 1x1 fmt65
+      b0 = cb #614be buf 8388608 +37120
+  draw x1
+  FULLSCREEN ps671af796 vs5d0fc680 draw 6 indices viewport 3840x2160 at 0,0 -> #7339e tex 3840x2160 r11g11b10f as r11g11b10f depth #733f6 tex 3840x2160 r32_typeless as d32f
+      t0 = #985fa tex 1x1 fmt65
+      b0 = cb #614be buf 8388608 +38144
+  draw x1
+  FULLSCREEN ps671af796 vs5d0fc680 draw 6 indices viewport 3840x2160 at 0,0 -> #7339e tex 3840x2160 r11g11b10f as r11g11b10f depth #733f6 tex 3840x2160 r32_typeless as d32f
+      t0 = #985fa tex 1x1 fmt65
+      b0 = cb #614be buf 8388608 +39168
+  draw x1
+  FULLSCREEN ps671af796 vs5d0fc680 draw 6 indices viewport 3840x2160 at 0,0 -> #7339e tex 3840x2160 r11g11b10f as r11g11b10f depth #733f6 tex 3840x2160 r32_typeless as d32f
+      t0 = #985fa tex 1x1 fmt65
+      b0 = cb #614be buf 8388608 +40192
+  draw x3
+  FULLSCREEN ps671af796 vs5d0fc680 draw 6 indices viewport 3840x2160 at 0,0 -> #7339e tex 3840x2160 r11g11b10f as r11g11b10f depth #733f6 tex 3840x2160 r32_typeless as d32f
+      t0 = #985fa tex 1x1 fmt65
+      b0 = cb #614be buf 8388608 +42240
+  draw x1
+  FULLSCREEN ps671af796 vs5d0fc680 draw 6 indices viewport 3840x2160 at 0,0 -> #7339e tex 3840x2160 r11g11b10f as r11g11b10f depth #733f6 tex 3840x2160 r32_typeless as d32f
+      t0 = #985fa tex 1x1 fmt65
+      b0 = cb #614be buf 8388608 +43264
+  draw x1
+  FULLSCREEN ps671af796 vs5d0fc680 draw 6 indices viewport 3840x2160 at 0,0 -> #7339e tex 3840x2160 r11g11b10f as r11g11b10f depth #733f6 tex 3840x2160 r32_typeless as d32f
+      t0 = #985fa tex 1x1 fmt65
+      b0 = cb #614be buf 8388608 +44288
+  draw x8
+  FULLSCREEN ps671af796 vs5d0fc680 draw 6 indices viewport 3840x2160 at 0,0 -> #7339e tex 3840x2160 r11g11b10f as r11g11b10f depth #733f6 tex 3840x2160 r32_typeless as d32f
+      t0 = #9867e tex 1x1 fmt65
+      b0 = cb #614be buf 8388608 +48896
+  draw x1
+  FULLSCREEN ps671af796 vs5d0fc680 draw 6 indices viewport 3840x2160 at 0,0 -> #7339e tex 3840x2160 r11g11b10f as r11g11b10f depth #733f6 tex 3840x2160 r32_typeless as d32f
+      t0 = #9867e tex 1x1 fmt65
+      b0 = cb #614be buf 8388608 +49920
+  draw x1
+  FULLSCREEN ps671af796 vs5d0fc680 draw 6 indices viewport 3840x2160 at 0,0 -> #7339e tex 3840x2160 r11g11b10f as r11g11b10f depth #733f6 tex 3840x2160 r32_typeless as d32f
+      t0 = #9867e tex 1x1 fmt65
+      b0 = cb #614be buf 8388608 +50944
+  draw x1
+  FULLSCREEN ps671af796 vs5d0fc680 draw 6 indices viewport 3840x2160 at 0,0 -> #7339e tex 3840x2160 r11g11b10f as r11g11b10f depth #733f6 tex 3840x2160 r32_typeless as d32f
+      t0 = #9867e tex 1x1 fmt65
+      b0 = cb #614be buf 8388608 +51968
+  draw x3
+  FULLSCREEN ps671af796 vs5d0fc680 draw 6 indices viewport 3840x2160 at 0,0 -> #7339e tex 3840x2160 r11g11b10f as r11g11b10f depth #733f6 tex 3840x2160 r32_typeless as d32f
+      t0 = #9867e tex 1x1 fmt65
+      b0 = cb #614be buf 8388608 +54016
+  draw x1
+  FULLSCREEN ps671af796 vs5d0fc680 draw 6 indices viewport 3840x2160 at 0,0 -> #7339e tex 3840x2160 r11g11b10f as r11g11b10f depth #733f6 tex 3840x2160 r32_typeless as d32f
+      t0 = #9867e tex 1x1 fmt65
+      b0 = cb #614be buf 8388608 +55040
+  draw x1
+  FULLSCREEN ps671af796 vs5d0fc680 draw 6 indices viewport 3840x2160 at 0,0 -> #7339e tex 3840x2160 r11g11b10f as r11g11b10f depth #733f6 tex 3840x2160 r32_typeless as d32f
+      t0 = #9867e tex 1x1 fmt65
+      b0 = cb #614be buf 8388608 +56064
+  draw x8
+  FULLSCREEN ps0c3872c7 vs5d0fc680 draw 6 indices viewport 3840x2160 at 0,0 -> #7339e tex 3840x2160 r11g11b10f as r11g11b10f depth #733f6 tex 3840x2160 r32_typeless as d32f
+      t0 = #2ecce tex 128x128 fmt98 mips8
+      b0 = cb #614be buf 8388608 +60672
+  FULLSCREEN ps671af796 vs5d0fc680 draw 6 indices viewport 3840x2160 at 0,0 -> #7339e tex 3840x2160 r11g11b10f as r11g11b10f depth #733f6 tex 3840x2160 r32_typeless as d32f
+      t0 = #57bb6 tex 39x31 fmt65
+      b0 = cb #614be buf 8388608 +61184
+  FULLSCREEN ps0c3872c7 vs5d0fc680 draw 6 indices viewport 3840x2160 at 0,0 -> #7339e tex 3840x2160 r11g11b10f as r11g11b10f depth #733f6 tex 3840x2160 r32_typeless as d32f
+      t0 = #2ecce tex 128x128 fmt98 mips8
+      b0 = cb #614be buf 8388608 +61696
+  FULLSCREEN ps671af796 vs5d0fc680 draw 6 indices viewport 3840x2160 at 0,0 -> #7339e tex 3840x2160 r11g11b10f as r11g11b10f depth #733f6 tex 3840x2160 r32_typeless as d32f
+      t0 = #5789e tex 32x32 fmt65
+      b0 = cb #614be buf 8388608 +62208
+  FULLSCREEN ps0c3872c7 vs5d0fc680 draw 6 indices viewport 3840x2160 at 0,0 -> #7339e tex 3840x2160 r11g11b10f as r11g11b10f depth #733f6 tex 3840x2160 r32_typeless as d32f
+      t0 = #2ecce tex 128x128 fmt98 mips8
+      b0 = cb #614be buf 8388608 +62720
+  FULLSCREEN ps671af796 vs5d0fc680 draw 6 indices viewport 3840x2160 at 0,0 -> #7339e tex 3840x2160 r11g11b10f as r11g11b10f depth #733f6 tex 3840x2160 r32_typeless as d32f
+      t0 = #57aae tex 28x31 fmt65
+      b0 = cb #614be buf 8388608 +63232
+  FULLSCREEN ps0c3872c7 vs5d0fc680 draw 6 indices viewport 3840x2160 at 0,0 -> #7339e tex 3840x2160 r11g11b10f as r11g11b10f depth #733f6 tex 3840x2160 r32_typeless as d32f
+      t0 = #2ecce tex 128x128 fmt98 mips8
+      b0 = cb #614be buf 8388608 +63744
+  FULLSCREEN ps671af796 vs5d0fc680 draw 6 indices viewport 3840x2160 at 0,0 -> #7339e tex 3840x2160 r11g11b10f as r11g11b10f depth #733f6 tex 3840x2160 r32_typeless as d32f
+      t0 = #579fe tex 26x33 fmt65
+      b0 = cb #614be buf 8388608 +64256
+  FULLSCREEN ps0c3872c7 vs5d0fc680 draw 6 indices viewport 3840x2160 at 0,0 -> #7339e tex 3840x2160 r11g11b10f as r11g11b10f depth #733f6 tex 3840x2160 r32_typeless as d32f
+      t0 = #2ecce tex 128x128 fmt98 mips8
+      b0 = cb #614be buf 8388608 +64768
+  FULLSCREEN ps671af796 vs5d0fc680 draw 6 indices viewport 3840x2160 at 0,0 -> #7339e tex 3840x2160 r11g11b10f as r11g11b10f depth #733f6 tex 3840x2160 r32_typeless as d32f
+      t0 = #57c0e tex 8x32 fmt65
+      b0 = cb #614be buf 8388608 +65280
+  FULLSCREEN ps0c3872c7 vs5d0fc680 draw 6 indices viewport 3840x2160 at 0,0 -> #7339e tex 3840x2160 r11g11b10f as r11g11b10f depth #733f6 tex 3840x2160 r32_typeless as d32f
+      t0 = #2ecce tex 128x128 fmt98 mips8
+      b0 = cb #614be buf 8388608 +65792
+  FULLSCREEN ps671af796 vs5d0fc680 draw 6 indices viewport 3840x2160 at 0,0 -> #7339e tex 3840x2160 r11g11b10f as r11g11b10f depth #733f6 tex 3840x2160 r32_typeless as d32f
+      t0 = #57a56 tex 17x32 fmt65
+      b0 = cb #614be buf 8388608 +66304
+  FULLSCREEN ps0c3872c7 vs5d0fc680 draw 6 indices viewport 3840x2160 at 0,0 -> #7339e tex 3840x2160 r11g11b10f as r11g11b10f depth #733f6 tex 3840x2160 r32_typeless as d32f
+      t0 = #2ecce tex 128x128 fmt98 mips8
+      b0 = cb #614be buf 8388608 +66816
+  FULLSCREEN ps671af796 vs5d0fc680 draw 6 indices viewport 3840x2160 at 0,0 -> #7339e tex 3840x2160 r11g11b10f as r11g11b10f depth #733f6 tex 3840x2160 r32_typeless as d32f
+      t0 = #57cbe tex 22x32 fmt65
+      b0 = cb #614be buf 8388608 +67328
+  FULLSCREEN ps0c3872c7 vs5d0fc680 draw 6 indices viewport 3840x2160 at 0,0 -> #7339e tex 3840x2160 r11g11b10f as r11g11b10f depth #733f6 tex 3840x2160 r32_typeless as d32f
+      t0 = #2ecce tex 128x128 fmt98 mips8
+      b0 = cb #614be buf 8388608 +67840
+  FULLSCREEN ps671af796 vs5d0fc680 draw 6 indices viewport 3840x2160 at 0,0 -> #7339e tex 3840x2160 r11g11b10f as r11g11b10f depth #733f6 tex 3840x2160 r32_typeless as d32f
+      t0 = #57df2 tex 27x32 fmt65
+      b0 = cb #614be buf 8388608 +68352
+  FULLSCREEN ps0c3872c7 vs5d0fc680 draw 6 indices viewport 3840x2160 at 0,0 -> #7339e tex 3840x2160 r11g11b10f as r11g11b10f depth #733f6 tex 3840x2160 r32_typeless as d32f
+      t0 = #2ecce tex 128x128 fmt98 mips8
+      b0 = cb #614be buf 8388608 +68864
+  FULLSCREEN ps671af796 vs5d0fc680 draw 6 indices viewport 3840x2160 at 0,0 -> #7339e tex 3840x2160 r11g11b10f as r11g11b10f depth #733f6 tex 3840x2160 r32_typeless as d32f
+      t0 = #5805a tex 29x32 fmt65
+      b0 = cb #614be buf 8388608 +69376
+  FULLSCREEN ps0c3872c7 vs5d0fc680 draw 6 indices viewport 3840x2160 at 0,0 -> #7339e tex 3840x2160 r11g11b10f as r11g11b10f depth #733f6 tex 3840x2160 r32_typeless as d32f
+      t0 = #2ecce tex 128x128 fmt98 mips8
+      b0 = cb #614be buf 8388608 +69888
+  FULLSCREEN ps671af796 vs5d0fc680 draw 6 indices viewport 3840x2160 at 0,0 -> #7339e tex 3840x2160 r11g11b10f as r11g11b10f depth #733f6 tex 3840x2160 r32_typeless as d32f
+      t0 = #580b2 tex 28x33 fmt65
+      b0 = cb #614be buf 8388608 +70400
+  FULLSCREEN ps0c3872c7 vs5d0fc680 draw 6 indices viewport 3840x2160 at 0,0 -> #7339e tex 3840x2160 r11g11b10f as r11g11b10f depth #733f6 tex 3840x2160 r32_typeless as d32f
+      t0 = #92bda tex 128x128 fmt98 mips8
+      b0 = cb #614be buf 8388608 +70912
+  FULLSCREEN ps0b9c0da1 vsd87b6d28 draw 5 indices viewport 3840x2160 at 0,0 -> #7339e tex 3840x2160 r11g11b10f as r11g11b10f depth #733f6 tex 3840x2160 r32_typeless as d32f
+      t0 = #85c02 tex 32x32 fmt71
+      b0 = cb #614be buf 8388608 +71424
+  FULLSCREEN ps0b9c0da1 vsd87b6d28 draw 5 indices viewport 3840x2160 at 0,0 -> #7339e tex 3840x2160 r11g11b10f as r11g11b10f depth #733f6 tex 3840x2160 r32_typeless as d32f
+      t0 = #85c02 tex 32x32 fmt71
+      b0 = cb #614be buf 8388608 +71424
+  FULLSCREEN ps0b9c0da1 vsd87b6d28 draw 5 indices viewport 3840x2160 at 0,0 -> #7339e tex 3840x2160 r11g11b10f as r11g11b10f depth #733f6 tex 3840x2160 r32_typeless as d32f
+      t0 = #85c02 tex 32x32 fmt71
+      b0 = cb #614be buf 8388608 +72192
+  FULLSCREEN ps0b9c0da1 vsd87b6d28 draw 5 indices viewport 3840x2160 at 0,0 -> #7339e tex 3840x2160 r11g11b10f as r11g11b10f depth #733f6 tex 3840x2160 r32_typeless as d32f
+      t0 = #85c02 tex 32x32 fmt71
+      b0 = cb #614be buf 8388608 +72704
+  draw x9
+  FULLSCREEN psb4f1363b vs402b7cbd draw 6 indices viewport 3840x2160 at 0,0 -> #7339e tex 3840x2160 r11g11b10f as r11g11b10f depth #733f6 tex 3840x2160 r32_typeless as d32f
+      b0 = cb #614be buf 8388608 +76288
+  FULLSCREEN psb4f1363b vs402b7cbd draw 6 indices viewport 3840x2160 at 0,0 -> #7339e tex 3840x2160 r11g11b10f as r11g11b10f depth #733f6 tex 3840x2160 r32_typeless as d32f
+      b0 = cb #614be buf 8388608 +76800
+  resolve #7339e tex 3840x2160 r11g11b10f -> #80ffa tex 3840x2160 r11g11b10f
+  render targets: null null null null null null null null
+  render targets: #80ffa tex 3840x2160 r11g11b10f as r11g11b10f depth #73582 tex 3840x2160 r32_typeless as d32f
+  render targets: null null null null null null null null
+  render targets: #73346 tex 3840x2160 rgb10a2_typeless as rgb10a2unorm
+  FULLSCREEN ps546df055 vscdbcb30a draw 6 indices viewport 3840x2160 at 0,0 -> #73346 tex 3840x2160 rgb10a2_typeless as rgb10a2unorm
+      t0 = #80ffa tex 3840x2160 r11g11b10f as r11g11b10f
+      b0 = cb #614be buf 8388608 +77312
+  render targets: null null null null null null null null
+  render targets: #612ae tex 3840x2160 rgb10a2unorm depth #0e36e tex 3840x2160 d32f as d32f
+  FULLSCREEN psaef3f639 vscdbcb30a draw 6 indices viewport 3840x2160 at 0,0 -> #612ae tex 3840x2160 rgb10a2unorm depth #0e36e tex 3840x2160 d32f as d32f
+      t0 = #73346 tex 3840x2160 rgb10a2_typeless as rgb10a2unorm
+      b0 = cb #614be buf 8388608 +77824
+---- deferred context C8, 10 events not yet in a command list
+---- deferred context C2, 19 events not yet in a command list
+---- deferred context C9, 36 events not yet in a command list
+---- deferred context C6, 6 events not yet in a command list
+---- deferred context C3, 39 events not yet in a command list
+---- deferred context C4, 79 events not yet in a command list
+---- deferred context C10, 16 events not yet in a command list
+---- deferred context C11, 6 events not yet in a command list
+---- deferred context C12, 95 events not yet in a command list
+---- deferred context C13, 5 events not yet in a command list
+---- deferred context C14, 22 events not yet in a command list
+---- deferred context C15, 31 events not yet in a command list
+---- deferred context C16, 5 events not yet in a command list
+==== PRESENT (back buffer #612ae tex 3840x2160 rgb10a2unorm), 0 more
