@@ -155,6 +155,7 @@ std::unordered_map<uint64_t, ShaderInfo> g_shaders;              // shader objec
 std::unordered_map<uint32_t, std::vector<Decl>> g_decls;         // id -> registers it declares
 size_t g_counts[3] = {};                                          // vertex, pixel, compute shaders seen
 std::unordered_set<uint32_t> g_dumpPs, g_dumpCs, g_dumpVs;        // ReShade.ini DumpShaders
+std::unordered_set<uint32_t> g_worldVs;                           // vertex shaders naming a ViewProj matrix
 
 uint32_t Fnv(const void* data, size_t n) {
     const uint8_t* p = static_cast<const uint8_t*>(data);
@@ -235,7 +236,13 @@ void OnInitPipeline(device*, pipeline_layout, uint32_t count, const pipeline_sub
         if ((kind == 'p' && g_dumpPs.count(id)) || (kind == 'c' && g_dumpCs.count(id)) || (kind == 'v' && g_dumpVs.count(id)))
             SaveBytecode(kind, id, d.code, d.code_size);
         std::vector<Decl> decls = ParseDecls(static_cast<const uint8_t*>(d.code), d.code_size);
+        bool world = false;
+        if (kind == 'v') {  // reflection names (RDEF) are kept in this game's shaders
+            const std::string code(static_cast<const char*>(d.code), d.code_size);
+            world = code.find("ViewProj") != std::string::npos;
+        }
         std::lock_guard<std::mutex> lock(g_pipeMutex);
+        if (world) g_worldVs.insert(id);
         g_decls[id] = std::move(decls);
         g_shaders[pipe.handle] = {kind, id};
         ++g_counts[slot];
@@ -695,24 +702,34 @@ void Other(command_list* cl) {
     ++Ctx(cl).draws;
 }
 
-bool OnDraw(command_list* cl, uint32_t vertices, uint32_t instances, uint32_t, uint32_t) {
+bool OnDraw(command_list* cl, uint32_t vertices, uint32_t instances, uint32_t first, uint32_t firstInstance) {
     if (rd::t_busy) return false;
     const bool fullscreen = vertices <= 4 && instances == 1;
     if (Recording()) {
         if (fullscreen) Pass(cl, false, Format("draw %u verts", vertices));
         else Other(cl);
     }
-    return fullscreen && rd::IsImmediate(cl) && rd::UpscalerOnDraw(cl);
+    if (!rd::IsImmediate(cl)) return false;
+    rd::UpscalerBeforeDraw(cl);
+    rd::DrawArgs a;
+    a.count = vertices, a.instances = instances, a.first = first, a.firstInstance = firstInstance;
+    return fullscreen && rd::UpscalerOnDraw(cl, a);
 }
 
-bool OnDrawIndexed(command_list* cl, uint32_t indices, uint32_t instances, uint32_t, int32_t, uint32_t) {
+bool OnDrawIndexed(command_list* cl, uint32_t indices, uint32_t instances, uint32_t first, int32_t vertexOffset,
+                   uint32_t firstInstance) {
     if (rd::t_busy) return false;
     const bool fullscreen = indices <= 6 && instances == 1;
     if (Recording()) {
         if (fullscreen) Pass(cl, false, Format("draw %u indices", indices));
         else Other(cl);
     }
-    if (!fullscreen || !rd::IsImmediate(cl) || !rd::UpscalerOnDraw(cl)) return false;
+    if (!rd::IsImmediate(cl)) return false;
+    rd::UpscalerBeforeDraw(cl);
+    rd::DrawArgs a;
+    a.indexed = true, a.count = indices, a.instances = instances, a.first = first, a.vertexOffset = vertexOffset;
+    a.firstInstance = firstInstance;
+    if (!fullscreen || !rd::UpscalerOnDraw(cl, a)) return false;
     if (Recording()) {
         std::lock_guard<std::mutex> lock(g_ctxMutex);
         AddLocked(Ctx(cl), "  (skipped: DLSS ran in its place)");
@@ -1038,6 +1055,11 @@ void Log(const char* fmt, ...) {
 
 std::wstring ExeDir() { return g_exeDir; }
 
+bool IsWorldVs(uint32_t id) {
+    std::lock_guard<std::mutex> lock(g_pipeMutex);
+    return g_worldVs.count(id) != 0;
+}
+
 void CaptureNote(command_list* cl, const char* fmt, ...) {
     if (!Recording()) return;
     char buf[512];
@@ -1080,6 +1102,7 @@ bool GetPassState(command_list* cl, PassState* out) {
     if (b != c.ps.cb.end()) out->psCb0 = b->second;
     if (!c.rtvs.empty()) out->rtv0 = c.rtvs[0];
     out->vp = c.vp;
+    out->dsv = c.dsv;
     return true;
 }
 

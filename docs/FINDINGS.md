@@ -231,3 +231,21 @@ saved upscaling mode applied the render scale from the first present.
 0.4.0 test (2026-11-23): user: "looks good". Log: FSR bridge on the RTX 5080, runtime offered
 3.1.6 / 2.3.4, FSR 3.1.6 ran DLAA and all upscaling modes (context recreated once for the HDR ->
 tonemapped switch), back to DLSS fine; no errors, no fallbacks.
+
+## 1.0.1 / 1.0.2 (2026-11-24): tree shimmer, sharpening
+
+User report: shimmer around trees with jitter on (DLAA and DLSS Quality), gone with jitter off.
+Capture near trees (docs/captures/1.0.1-trees.txt): every deferred-context scene viewport was
+jittered; the main context drew 50 depth-tested 6-index sprites with psa4f4a9d9 / vs85af431b into
+the scene colour (small 32-128 px textures: particles, e.g. leaves) just before the TAA, with an
+unjittered viewport. DLSS was told the whole image moved; those didn't, so they shimmered.
+1.0.2: before every main-context draw before the TAA, if the viewport is the render size with the
+scene depth bound and the vertex shader names a ViewProj matrix (reflection strings kept in this
+game's shaders), the viewport gets this frame's jitter (index from the frame's command lists);
+other draws get the game's viewport back. The log names each such vertex shader once.
+
+Sharpening (1.0.1, RCAS after DLSS, FSR's own RCAS for FSR) made no visible difference at DLAA:
+it ran on the HDR image before bloom, depth of field and tonemapping. 1.0.2: at DLAA with DLSS the
+game's tonemap draw (psf2011a7b, HDR -> rgba8, before the UI) is run by the add-on and RCAS applied
+to its result. Upscaling: unchanged (RCAS at the stretch, on the tonemapped image). DLSS has no
+sharpening of its own since 2.5.1 (the sharpness parameter is ignored), hence RCAS.

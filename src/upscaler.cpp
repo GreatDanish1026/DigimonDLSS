@@ -49,6 +49,7 @@ using namespace reshade::api;
 
 constexpr uint32_t kTaaPs = 0x40e6b08f;
 constexpr uint32_t kBlitPs = 0x5921bc7e;
+constexpr uint32_t kTonemapPs = 0xf2011a7b;  // HDR -> rgba8, before the UI
 
 // ---------------------------------------------------------------- settings (ReShade.ini [DigimonDLSS])
 
@@ -309,6 +310,15 @@ struct Pending {
     int index = -1, lists = 0;  // for the log
 } g_pending;
 
+// Main-context world-space draws before the TAA (particles and sprites in the scene, e.g. psa4f4a9d9,
+// found by a capture near trees: unjittered, they shimmered under DLSS) get the jitter too.
+bool g_beforeTaa = false;   // between a present and this frame's TAA
+bool g_immJittered = false; // the immediate context's viewport is currently the add-on's jittered one
+std::unordered_map<uint32_t, bool> g_immVsLogged;
+// DLAA ran with DLSS this frame: the sharpening runs after the game's tonemap (it's lost in the HDR
+// image before bloom, depth of field and tonemapping).
+bool g_dlaaFrame = false;
+
 std::string g_error;          // why the game's TAA is in use
 bool g_upscaleBroken = false;  // DLSS failed at the stretch: render scale back to 100% until a setting changes
 uint64_t g_frames = 0, g_upscaledFrames = 0, g_fallbacks = 0, g_mixedFrames = 0, g_unjittered = 0;
@@ -530,6 +540,8 @@ bool OnTaa(command_list* cl, const PassState& ps) {
     g_frameIndices.clear();
     g_renderW = ps.vp.width, g_renderH = ps.vp.height;
     g_pending.set = false;
+    g_beforeTaa = false;
+    g_dlaaFrame = false;
 
     if (!g_cfg.enabled) {
         g_jitterLive = false;
@@ -580,9 +592,8 @@ bool OnTaa(command_list* cl, const PassState& ps) {
         g_pending = {true, renderW, renderH, sx, sy, index, lists};
     } else if (ok) {
         ok = Upscale(context, tech, color, true, renderW, renderH, renderW, renderH, sx, sy, g_gpu.hdrOut, error);
-        if (ok)
-            context->CopySubresourceRegion(target, 0, 0, 0, 0, Sharpened(context, tech, g_gpu.hdrOut, renderW, renderH), 0,
-                                           &box);
+        if (ok) context->CopySubresourceRegion(target, 0, 0, 0, 0, g_gpu.hdrOut.tex, 0, &box);
+        g_dlaaFrame = ok && tech == Tech::Dlss;
     }
     t_busy = false;
     if (!ok) return FallBack(error.empty() ? "DLSS failed" : error);
@@ -730,6 +741,10 @@ void UpscalerOnSamplers(command_list* cl, shader_stage stages, const descriptor_
 void UpscalerOnViewports(command_list* cl, uint32_t first, uint32_t count, const viewport* vps) {
     if (first != 0 || count == 0 || count > 8) return;
     const bool immediate = IsImmediate(cl);
+    if (immediate) {
+        std::lock_guard<std::mutex> lock(g_mutex);
+        g_immJittered = false;
+    }
     int index = -1;
     bool big = false;
     {
@@ -792,6 +807,9 @@ void UpscalerPresent() {
         ++g_recordIndex;
         if (g_listIndex.size() > 256) g_listIndex.clear();  // lists that were never executed
         g_pending.set = false;                              // no stretch this frame (menus, 100%)
+        g_beforeTaa = true;
+        g_immJittered = false;
+        g_dlaaFrame = false;
         scale = g_cfg.enabled && !g_upscaleBroken ? kModes[g_cfg.mode].scale : 1.0f;
         const float r = scale > 0 ? 1.0f / scale : 1.0f;
         g_jitterPhases = std::min(128, std::max(32, static_cast<int>(std::ceil(8.0f * r * r))));
@@ -801,12 +819,80 @@ void UpscalerPresent() {
     g_mipBias = scaled && g_cfg.textureDetail ? std::log2(scale) : 0.0f;
 }
 
-bool UpscalerOnDraw(command_list* cl) {
+// The game's tonemap at DLAA with sharpening on: the game's draw runs, then RCAS on its result.
+bool OnTonemap(command_list* cl, const PassState& ps, const DrawArgs& a) {
+    std::lock_guard<std::mutex> lock(g_mutex);
+    if (!g_dlaaFrame || g_cfg.sharpness <= 0.001f) return false;
+    g_dlaaFrame = false;
+    const resource targetRes = ViewResource(ps.rtv0);
+    const UINT w = static_cast<UINT>(ps.vp.width), h = static_cast<UINT>(ps.vp.height);
+    if (!targetRes.handle || !w || !h || ps.vp.x != 0 || ps.vp.y != 0) return false;
+    auto* target = reinterpret_cast<ID3D11Resource*>(targetRes.handle);
+    const D3D11_TEXTURE2D_DESC td = DescOf(target);
+    if (td.Width < w || td.Height < h) return false;
+    auto* context = reinterpret_cast<ID3D11DeviceContext*>(cl->get_native());
+    std::string error;
+    t_busy = true;
+    if (a.indexed) cl->draw_indexed(a.count, a.instances, a.first, a.vertexOffset, a.firstInstance);
+    else cl->draw(a.count, a.instances, a.first, a.firstInstance);
+    if (Ensure(g_gpu.ldrIn, td.Width, td.Height, Typed(td.Format), false, error, "tonemapped copy")) {
+        const D3D11_BOX box = {0, 0, 0, w, h, 1};
+        context->CopySubresourceRegion(g_gpu.ldrIn.tex, 0, 0, 0, 0, target, 0, &box);
+        ID3D11Texture2D* sharp = Sharpened(context, Tech::Dlss, g_gpu.ldrIn, w, h);
+        if (sharp != g_gpu.ldrIn.tex) context->CopySubresourceRegion(target, 0, 0, 0, 0, sharp, 0, &box);
+    }
+    t_busy = false;
+    return true;  // the game's draw already ran
+}
+
+bool UpscalerOnDraw(command_list* cl, const DrawArgs& a) {
     PassState ps;
     if (!GetPassState(cl, &ps)) return false;
     if (ps.ps == kTaaPs) return OnTaa(cl, ps);
     if (ps.ps == kBlitPs) return OnStretch(cl, ps);
+    if (ps.ps == kTonemapPs) return OnTonemap(cl, ps, a);
     return false;
+}
+
+void UpscalerBeforeDraw(command_list* cl) {
+    PassState ps;
+    if (!GetPassState(cl, &ps)) return;
+    int index = -1;
+    bool want = false, had = false, logIt = false;
+    {
+        std::lock_guard<std::mutex> lock(g_mutex);
+        had = g_immJittered;
+        const bool scene = g_beforeTaa && g_jitterLive && g_cfg.jitter && g_renderW > 0 && ps.vp.x == 0 && ps.vp.y == 0 &&
+                           ps.vp.width == g_renderW && ps.vp.height == g_renderH && ps.dsv.handle;
+        if (scene && IsWorldVs(ps.vs)) {
+            int best = 0;  // the jitter this frame's scene command lists were drawn with
+            for (const auto& [i, n] : g_frameIndices)
+                if (n > best) best = n, index = i;
+            want = index >= 0;
+        }
+        if (scene) {
+            auto it = g_immVsLogged.find(ps.vs);
+            if (it == g_immVsLogged.end()) {
+                g_immVsLogged[ps.vs] = want;
+                logIt = g_immVsLogged.size() <= 64;
+            }
+        }
+        if (want == had) return;
+        g_immJittered = want;
+    }
+    if (logIt) Log("main-context draw before the TAA with vs%08x ps%08x: %s", ps.vs, ps.ps, want ? "jittered" : "not jittered");
+    viewport v = ps.vp;
+    if (want) {
+        float sx, sy;
+        SampleOffset(index, &sx, &sy);
+        v.x -= sx;
+        v.y -= sy;
+    }
+    t_busy = true;
+    cl->bind_viewports(0, 1, &v);
+    t_busy = false;
+    CaptureNote(cl, want ? "main-context world-space draws (vs%08x) jittered (index %d)" : "main-context viewport unjittered again (vs%08x)",
+                ps.vs, index);
 }
 
 void UpscalerOverlay() {
