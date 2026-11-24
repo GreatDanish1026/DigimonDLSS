@@ -1,4 +1,4 @@
-# DigimonDLSS 1.0.0
+# DigimonDLSS 1.0.3
 
 ReShade add-on for **Digimon Story: Time Stranger** (PC, DirectX 11) that replaces the game's TAA
 with **NVIDIA DLSS** or **AMD FSR 3.1 / FSR 4**, for native anti-aliasing or upscaling.
@@ -14,9 +14,13 @@ with **NVIDIA DLSS** or **AMD FSR 3.1 / FSR 4**, for native anti-aliasing or ups
   shared between the two; on Radeon cards that support it, AMD's runtime picks FSR 4.
 - **Motion vectors and camera jitter**: the game has neither (its TAA works from depth and the
   camera alone). The add-on builds motion vectors from the depth buffer and camera, and shifts the
-  3D scene by a sub-pixel amount each frame, which DLSS and FSR need for fine detail.
+  3D scene by a sub-pixel amount each frame, which DLSS and FSR need for fine detail. Particles
+  and sprites the game draws separately (leaves around trees, for example) get the same shift.
 - **Sharper textures** when upscaling (mip bias, as NVIDIA recommends), following the mode.
-- **DLSS model**: Automatic, J, K, L or M. **FSR sharpness** slider (off by default).
+- **Sharpening** slider (off by default): AMD's contrast-adaptive sharpening (RCAS) after DLSS,
+  applied after the game's tonemapping so it shows, or FSR's own sharpening. DLSS itself no longer
+  sharpens (NVIDIA removed that in DLSS 2.5.1).
+- **DLSS model**: Automatic, J, K, L or M.
 - If DLSS or FSR can't run, the game's own TAA stays on and the overlay says why.
 
 ## Requirements
@@ -49,7 +53,7 @@ ReShade overlay (Home key), Add-ons tab, **DigimonDLSS**; saved in `ReShade.ini`
 `[DigimonDLSS]`.
 
 - **Upscaling** on/off, **Upscaler**, **Mode** (DLAA or an upscaling mode), status line.
-- **DLSS model** (DLSS) or **FSR sharpness** (FSR).
+- **Sharpening** (both upscalers) and **DLSS model** (DLSS).
 - **Camera jitter** (on): leave it on; off gives a softer image.
 - **Texture detail when upscaling** (on).
 - **Trust current frame on objects the game keeps out of TAA** (on): those objects (the game marks
@@ -85,3 +89,11 @@ with it: `docs/FINDINGS.md`.
 ## Licence
 
 MIT (LICENSE). Third-party licences in `DigimonDLSS-licenses` and THIRD_PARTY_NOTICES.txt.
+
+## Changes
+
+- **1.0.3**: Sharpening slider for DLSS and FSR (replaces 1.0.0's FSR sharpness; the old setting
+  carries over). Fixed shimmering around trees with camera jitter on: particles and sprites the game
+  draws outside its main scene passes now get the jitter too. The frame capture tool marks which
+  viewports got the jitter.
+- **1.0.0**: first release.
