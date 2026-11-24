@@ -272,3 +272,6 @@ screen-space check looked at all 8 texture slots, including old full-size textur
 bound; at upscaling the viewport is smaller than them, so particles counted as screen-space.
 1.0.5: only slots the pixel shader declares count; every world-space draw before the TAA is
 logged once per shader pair with the decision and its reason.
+1.0.5 test log (4K Balanced -> DLAA -> Balanced): vs85af431b/psa4f4a9d9 (particles) jittered while
+upscaling; vs4bdb1306/psbb8b8bf0 and vs405c4a25/ps55547495 not (declared t0 is 3840x2160:
+screen-space). Confirms the 1.0.4 cause: stale undeclared full-size textures.
