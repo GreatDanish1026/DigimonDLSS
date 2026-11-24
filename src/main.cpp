@@ -1060,6 +1060,15 @@ bool IsWorldVs(uint32_t id) {
     return g_worldVs.count(id) != 0;
 }
 
+bool PsDeclaresSrv(uint32_t ps, uint32_t slot) {
+    bool known = false;
+    const std::vector<Decl> decls = Decls(ps, &known);
+    if (!known) return true;
+    for (const Decl& d : decls)
+        if (d.cls == 't' && slot >= d.lo && slot <= d.hi) return true;
+    return false;
+}
+
 void CaptureNote(command_list* cl, const char* fmt, ...) {
     if (!Recording()) return;
     char buf[512];

@@ -41,6 +41,7 @@
 #include <map>
 #include <mutex>
 #include <unordered_map>
+#include <unordered_set>
 
 namespace rd {
 namespace {
@@ -329,7 +330,7 @@ struct Pending {
 // found by a capture near trees: unjittered, they shimmered under DLSS) get the jitter too.
 bool g_beforeTaa = false;   // between a present and this frame's TAA
 bool g_immJittered = false; // the immediate context's viewport is currently the add-on's jittered one
-std::unordered_map<uint32_t, bool> g_immVsLogged;
+std::unordered_set<uint64_t> g_immPairsLogged;  // vertex | pixel shader pairs already logged
 // DLAA ran with DLSS this frame: the sharpening runs after the game's tonemap (it's lost in the HDR
 // image before bloom, depth of field and tonemapping).
 bool g_dlaaFrame = false;
@@ -874,40 +875,53 @@ void UpscalerBeforeDraw(command_list* cl) {
     // A pixel shader reading a screen-sized texture is a screen-space pass (a full-screen copy or
     // composite, even when its vertex shader names a ViewProj matrix: vs4bdb1306 / psbb8b8bf0 copies
     // the scene image before the TAA); jittering it would shift the already jittered image again.
-    bool screenInput = false;
-    for (const resource_view& v : ps.psSrv) {
-        if (!v.handle || ps.vp.width <= 0) continue;
+    // Only the slots the pixel shader declares: D3D11 keeps old bindings, and a full-size texture left
+    // in an unused slot made particles count as screen-space when upscaling (1.0.4: the viewport is
+    // then smaller than the game's full-size textures).
+    int screenSlot = -1;
+    UINT screenW = 0, screenH = 0;
+    for (uint32_t i = 0; i < 8 && screenSlot < 0; ++i) {
+        const resource_view v = ps.psSrv[i];
+        if (!v.handle || ps.vp.width <= 0 || !PsDeclaresSrv(ps.ps, i)) continue;
         const resource r = ViewResource(v);
         if (!r.handle) continue;
         const D3D11_TEXTURE2D_DESC d = DescOf(reinterpret_cast<ID3D11Resource*>(r.handle));
-        if (d.Width >= static_cast<UINT>(ps.vp.width) && d.Height >= static_cast<UINT>(ps.vp.height)) {
-            screenInput = true;
-            break;
-        }
+        if (d.Width >= static_cast<UINT>(ps.vp.width) && d.Height >= static_cast<UINT>(ps.vp.height))
+            screenSlot = static_cast<int>(i), screenW = d.Width, screenH = d.Height;
     }
+    const bool world = IsWorldVs(ps.vs);
     int index = -1;
-    bool want = false, had = false, logIt = false;
+    bool want = false, had = false, logIt = false, sized = false;
     {
         std::lock_guard<std::mutex> lock(g_mutex);
         had = g_immJittered;
-        const bool scene = g_beforeTaa && g_jitterLive && g_cfg.jitter && RenderSized(ps.vp) && ps.dsv.handle;
-        if (scene && IsWorldVs(ps.vs) && !screenInput) {
+        const bool live = g_beforeTaa && g_jitterLive && g_cfg.jitter && ps.dsv.handle;
+        sized = live && RenderSized(ps.vp);
+        if (sized && world && screenSlot < 0) {
             int best = 0;  // the jitter this frame's scene command lists were drawn with
             for (const auto& [i, n] : g_frameIndices)
                 if (n > best) best = n, index = i;
             want = index >= 0;
         }
-        if (scene) {
-            auto it = g_immVsLogged.find(ps.vs);
-            if (it == g_immVsLogged.end()) {
-                g_immVsLogged[ps.vs] = want;
-                logIt = g_immVsLogged.size() <= 64;
-            }
+        // Every world-space draw before the TAA is logged once per shader pair, with the decision.
+        if (live && world) {
+            const uint64_t key = (static_cast<uint64_t>(ps.vs) << 32) | ps.ps;
+            if (g_immPairsLogged.size() < 64 && g_immPairsLogged.insert(key).second) logIt = true;
         }
-        if (want == had) return;
+        if (want == had && !logIt) return;
         g_immJittered = want;
     }
-    if (logIt) Log("main-context draw before the TAA with vs%08x ps%08x: %s", ps.vs, ps.ps, want ? "jittered" : "not jittered");
+    if (logIt) {
+        if (want) Log("main-context draw before the TAA, vs%08x ps%08x: jittered", ps.vs, ps.ps);
+        else if (!sized)
+            Log("main-context draw before the TAA, vs%08x ps%08x: not jittered (viewport %gx%g at %g,%g isn't the render size)",
+                ps.vs, ps.ps, ps.vp.width, ps.vp.height, ps.vp.x, ps.vp.y);
+        else if (screenSlot >= 0)
+            Log("main-context draw before the TAA, vs%08x ps%08x: not jittered (reads a %ux%u texture in t%d: screen-space)",
+                ps.vs, ps.ps, screenW, screenH, screenSlot);
+        else Log("main-context draw before the TAA, vs%08x ps%08x: not jittered (no jitter index this frame)", ps.vs, ps.ps);
+    }
+    if (want == had) return;
     viewport v = ps.vp;
     if (want) {
         float sx, sy;

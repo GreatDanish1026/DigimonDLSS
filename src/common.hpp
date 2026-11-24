@@ -43,6 +43,8 @@ struct DrawArgs {
 // The vertex shader transforms by the camera (its reflection names a ViewProj matrix): world-space
 // geometry, not a full-screen pass.
 bool IsWorldVs(uint32_t id);
+// The pixel shader declares texture register t<slot> (true when its declarations aren't known).
+bool PsDeclaresSrv(uint32_t ps, uint32_t slot);
 bool GetPassState(reshade::api::command_list* cl, PassState* out);
 reshade::api::resource ViewResource(reshade::api::resource_view view);
 bool IsImmediate(reshade::api::command_list* cl);

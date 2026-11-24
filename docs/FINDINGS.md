@@ -265,3 +265,10 @@ viewports to the TAA viewport exactly, so passes rounding the size differently s
 at 4K Quality is exactly 2560x1440, so it never showed here (Balanced at 4K is fractional too:
 2227.2 x 1252.8). 1.0.4: render-size viewports matched within 2 pixels (RenderSized), every
 differing size logged once ("viewport ... matched to the render size ...").
+
+1.0.4 test (4K Balanced, 2227x1252): no viewport differed from the render size (no "matched"
+lines), and the particle shader was never logged as jittered while upscaling. Suspected: the
+screen-space check looked at all 8 texture slots, including old full-size textures the game left
+bound; at upscaling the viewport is smaller than them, so particles counted as screen-space.
+1.0.5: only slots the pixel shader declares count; every world-space draw before the TAA is
+logged once per shader pair with the decision and its reason.
