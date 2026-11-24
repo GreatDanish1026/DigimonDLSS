@@ -857,6 +857,20 @@ bool UpscalerOnDraw(command_list* cl, const DrawArgs& a) {
 void UpscalerBeforeDraw(command_list* cl) {
     PassState ps;
     if (!GetPassState(cl, &ps)) return;
+    // A pixel shader reading a screen-sized texture is a screen-space pass (a full-screen copy or
+    // composite, even when its vertex shader names a ViewProj matrix: vs4bdb1306 / psbb8b8bf0 copies
+    // the scene image before the TAA); jittering it would shift the already jittered image again.
+    bool screenInput = false;
+    for (const resource_view& v : ps.psSrv) {
+        if (!v.handle || ps.vp.width <= 0) continue;
+        const resource r = ViewResource(v);
+        if (!r.handle) continue;
+        const D3D11_TEXTURE2D_DESC d = DescOf(reinterpret_cast<ID3D11Resource*>(r.handle));
+        if (d.Width >= static_cast<UINT>(ps.vp.width) && d.Height >= static_cast<UINT>(ps.vp.height)) {
+            screenInput = true;
+            break;
+        }
+    }
     int index = -1;
     bool want = false, had = false, logIt = false;
     {
@@ -864,7 +878,7 @@ void UpscalerBeforeDraw(command_list* cl) {
         had = g_immJittered;
         const bool scene = g_beforeTaa && g_jitterLive && g_cfg.jitter && g_renderW > 0 && ps.vp.x == 0 && ps.vp.y == 0 &&
                            ps.vp.width == g_renderW && ps.vp.height == g_renderH && ps.dsv.handle;
-        if (scene && IsWorldVs(ps.vs)) {
+        if (scene && IsWorldVs(ps.vs) && !screenInput) {
             int best = 0;  // the jitter this frame's scene command lists were drawn with
             for (const auto& [i, n] : g_frameIndices)
                 if (n > best) best = n, index = i;

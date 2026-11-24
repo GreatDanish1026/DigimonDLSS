@@ -249,3 +249,8 @@ it ran on the HDR image before bloom, depth of field and tonemapping. 1.0.2: at 
 game's tonemap draw (psf2011a7b, HDR -> rgba8, before the UI) is run by the add-on and RCAS applied
 to its result. Upscaling: unchanged (RCAS at the stretch, on the tonemapped image). DLSS has no
 sharpening of its own since 2.5.1 (the sharpness parameter is ignored), hence RCAS.
+1.0.2 test log: jittered main-context draws were vs85af431b/psa4f4a9d9 (the particles, intended)
+and vs4bdb1306/psbb8b8bf0, a full-screen copy of the scene image before the TAA whose vertex shader
+also names a ViewProj matrix (wrongly jittered: shifts the jittered image again). DLAA sharpening
+ran (user kept Sharpness=1). 1.0.3: no jitter for draws whose pixel shader reads a screen-sized
+texture (screen-space passes).
