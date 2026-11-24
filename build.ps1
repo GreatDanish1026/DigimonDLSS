@@ -36,6 +36,7 @@ $cmd = @(
     "call `"$vcvars`" >nul",
     "fxc /nologo /T cs_5_0 /E main /O3 /Vn kMotionCs /Fh `"$obj\motion_cs.h`" `"$root\src\motion.hlsl`" >nul",
     "fxc /nologo /T cs_5_0 /E main /O3 /Vn kCopyCs /Fh `"$obj\copy_cs.h`" `"$root\src\copy.hlsl`" >nul",
+    "fxc /nologo /T cs_5_0 /E main /O3 /Vn kRcasCs /Fh `"$obj\rcas_cs.h`" `"$root\src\rcas.hlsl`" >nul",
     ("cl /nologo /std:c++17 /O2 /EHsc /MT /W3 /D_CRT_SECURE_NO_WARNINGS /DNOMINMAX " +
      "/I `"$obj`" /I `"$root\third_party\imgui`" /I `"$root\third_party\reshade\include`" /I `"$root\third_party\dlss\include`" " +
      "/I `"$root\third_party\fidelityfx\api\include`" /I `"$root\third_party\fidelityfx\upscalers\include`" " +

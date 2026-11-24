@@ -13,6 +13,9 @@
 namespace rd {
 
 void Log(const char* fmt, ...);
+// A line in the frame capture being recorded, in this context's stream (nothing when not recording).
+// Takes main.cpp's context lock: don't call with the upscaler's lock held.
+void CaptureNote(reshade::api::command_list* cl, const char* fmt, ...);
 std::wstring ExeDir();  // with a trailing backslash
 
 // True while the add-on itself is calling into D3D11/NGX on this thread: event handlers return at

@@ -32,6 +32,7 @@
 #include "version.h"
 
 #include "copy_cs.h"
+#include "rcas_cs.h"
 #include "motion_cs.h"
 
 #include <algorithm>
@@ -65,7 +66,7 @@ constexpr int kModeCount = 5;
 struct Settings {
     bool enabled = true;
     int upscaler = 0;               // 0 Automatic (DLSS, else FSR), 1 DLSS, 2 FSR
-    float fsrSharpness = 0.0f;      // FSR's RCAS, 0 = off
+    float sharpness = 0.0f;         // RCAS after DLSS, or FSR's own; 0 = off
     int mode = 0;                   // kModes
     int model = dlss::kPresetAuto;  // -1 Automatic, 10 J, 11 K, 12 L, 13 M
     bool jitter = true;
@@ -78,7 +79,8 @@ void LoadSettings() {
     reshade::get_config_value(nullptr, RD_PRODUCT, "Enabled", g_cfg.enabled);
     reshade::get_config_value(nullptr, RD_PRODUCT, "Mode", g_cfg.mode);
     reshade::get_config_value(nullptr, RD_PRODUCT, "Upscaler", g_cfg.upscaler);
-    reshade::get_config_value(nullptr, RD_PRODUCT, "FsrSharpness", g_cfg.fsrSharpness);
+    reshade::get_config_value(nullptr, RD_PRODUCT, "FsrSharpness", g_cfg.sharpness);  // 1.0.0's name
+    reshade::get_config_value(nullptr, RD_PRODUCT, "Sharpness", g_cfg.sharpness);
     reshade::get_config_value(nullptr, RD_PRODUCT, "DlssModel", g_cfg.model);
     reshade::get_config_value(nullptr, RD_PRODUCT, "Jitter", g_cfg.jitter);
     reshade::get_config_value(nullptr, RD_PRODUCT, "FlipJitterX", g_cfg.flipX);
@@ -88,14 +90,14 @@ void LoadSettings() {
     if (g_cfg.model != dlss::kPresetAuto && (g_cfg.model < 10 || g_cfg.model > 13)) g_cfg.model = dlss::kPresetAuto;
     if (g_cfg.mode < 0 || g_cfg.mode >= kModeCount) g_cfg.mode = 0;
     if (g_cfg.upscaler < 0 || g_cfg.upscaler > 2) g_cfg.upscaler = 0;
-    g_cfg.fsrSharpness = std::min(1.0f, std::max(0.0f, g_cfg.fsrSharpness));
+    if (!(g_cfg.sharpness >= 0.0f && g_cfg.sharpness <= 1.0f)) g_cfg.sharpness = 0.0f;
 }
 
 void SaveSettings() {
     reshade::set_config_value(nullptr, RD_PRODUCT, "Enabled", g_cfg.enabled);
     reshade::set_config_value(nullptr, RD_PRODUCT, "Mode", g_cfg.mode);
     reshade::set_config_value(nullptr, RD_PRODUCT, "Upscaler", g_cfg.upscaler);
-    reshade::set_config_value(nullptr, RD_PRODUCT, "FsrSharpness", g_cfg.fsrSharpness);
+    reshade::set_config_value(nullptr, RD_PRODUCT, "Sharpness", g_cfg.sharpness);
     reshade::set_config_value(nullptr, RD_PRODUCT, "DlssModel", g_cfg.model);
     reshade::set_config_value(nullptr, RD_PRODUCT, "Jitter", g_cfg.jitter);
     reshade::set_config_value(nullptr, RD_PRODUCT, "FlipJitterX", g_cfg.flipX);
@@ -157,6 +159,8 @@ struct Gpu {
     Tex fsrDepth;                    // FSR: reversed infinite depth (near / linear depth)
     Tex fsrOut;                      // FSR: its rgba16f output, copied into hdrOut / ldrOut
     ID3D11ComputeShader* copyCs = nullptr;
+    ID3D11ComputeShader* rcasCs = nullptr;
+    Tex sharpened;                   // RCAS output (like hdrOut / ldrOut)
     ID3D11Buffer* sizeCb = nullptr;
     // The camera's vertical field of view for FSR, read back from the TAA constants one frame late.
     ID3D11Buffer* fovStaging[2] = {};
@@ -170,13 +174,13 @@ float g_tanHalfFovY = 0.6f;        // until the first read-back
 void ReleaseTextures() {
     g_gpu.motion.Release(), g_gpu.depth.Release(), g_gpu.mask.Release();
     g_gpu.hdrOut.Release(), g_gpu.ldrIn.Release(), g_gpu.ldrOut.Release();
-    g_gpu.fsrDepth.Release(), g_gpu.fsrOut.Release();
+    g_gpu.fsrDepth.Release(), g_gpu.fsrOut.Release(), g_gpu.sharpened.Release();
 }
 
 void ReleaseGpu() {
     ReleaseTextures();
     SafeRelease(g_gpu.motionCs), SafeRelease(g_gpu.params), SafeRelease(g_gpu.state);
-    SafeRelease(g_gpu.copyCs), SafeRelease(g_gpu.sizeCb);
+    SafeRelease(g_gpu.copyCs), SafeRelease(g_gpu.rcasCs), SafeRelease(g_gpu.sizeCb);
     for (int i = 0; i < 2; ++i) SafeRelease(g_gpu.fovStaging[i]), g_gpu.fovPending[i] = false;
     g_gpu.device = nullptr;
 }
@@ -209,7 +213,8 @@ bool InitGpu(ID3D11Device* device, std::string& error) {
         error = "couldn't create a constant buffer";
         return false;
     }
-    if (FAILED(device->CreateComputeShader(kCopyCs, sizeof(kCopyCs), nullptr, &g_gpu.copyCs))) {
+    if (FAILED(device->CreateComputeShader(kCopyCs, sizeof(kCopyCs), nullptr, &g_gpu.copyCs)) ||
+        FAILED(device->CreateComputeShader(kRcasCs, sizeof(kRcasCs), nullptr, &g_gpu.rcasCs))) {
         error = "couldn't create the copy shader";
         return false;
     }
@@ -450,11 +455,41 @@ bool Upscale(ID3D11DeviceContext* context, Tech tech, ID3D11Resource* color, boo
     bi.jitterX = di.jitterX, bi.jitterY = di.jitterY;  // the same image-shift convention as DLSS
     bi.cameraNear = kFsrNear;
     bi.cameraFovY = 2.0f * std::atan(g_tanHalfFovY);
-    bi.sharpness = g_cfg.fsrSharpness;
+    bi.sharpness = g_cfg.sharpness;
     bi.reset = di.reset;
     if (!bridge::Evaluate(context, bi, error)) return false;
     CopyOut(context, out, outW, outH);
     return true;
+}
+
+// DLSS's result sharpened (RCAS) into g_gpu.sharpened; returns the texture to copy into the game's
+// target: `out` itself when sharpening is off, with FSR (it sharpens itself), or if this fails.
+ID3D11Texture2D* Sharpened(ID3D11DeviceContext* context, Tech tech, Tex& out, UINT w, UINT h) {
+    if (tech != Tech::Dlss || g_cfg.sharpness <= 0.001f) return out.tex;
+    std::string error;
+    D3D11_TEXTURE2D_DESC d = DescOf(out.tex);
+    if (!Ensure(g_gpu.sharpened, d.Width, d.Height, d.Format, true, error, "sharpening output")) return out.tex;
+    if (!out.srv && FAILED(g_gpu.device->CreateShaderResourceView(out.tex, nullptr, &out.srv))) return out.tex;
+    ID3D11DeviceContext1* ctx1 = nullptr;
+    context->QueryInterface(__uuidof(ID3D11DeviceContext1), reinterpret_cast<void**>(&ctx1));
+    ID3DDeviceContextState* gameState = nullptr;
+    ctx1->SwapDeviceContextState(g_gpu.state, &gameState);
+    ctx1->ClearState();
+    struct {
+        float sharpness, pad[3];
+        uint32_t w, h, pad2[2];
+    } p = {g_cfg.sharpness, {}, w, h, {}};
+    ctx1->UpdateSubresource(g_gpu.sizeCb, 0, nullptr, &p, 0, 0);
+    ctx1->CSSetConstantBuffers(0, 1, &g_gpu.sizeCb);
+    ctx1->CSSetShaderResources(0, 1, &out.srv);
+    ctx1->CSSetUnorderedAccessViews(0, 1, &g_gpu.sharpened.uav, nullptr);
+    ctx1->CSSetShader(g_gpu.rcasCs, nullptr, 0);
+    ctx1->Dispatch((w + 7) / 8, (h + 7) / 8, 1);
+    ctx1->ClearState();
+    ctx1->SwapDeviceContextState(gameState, nullptr);
+    if (gameState) gameState->Release();
+    ctx1->Release();
+    return g_gpu.sharpened.tex;
 }
 
 // Called with g_mutex held.
@@ -545,7 +580,9 @@ bool OnTaa(command_list* cl, const PassState& ps) {
         g_pending = {true, renderW, renderH, sx, sy, index, lists};
     } else if (ok) {
         ok = Upscale(context, tech, color, true, renderW, renderH, renderW, renderH, sx, sy, g_gpu.hdrOut, error);
-        if (ok) context->CopySubresourceRegion(target, 0, 0, 0, 0, g_gpu.hdrOut.tex, 0, &box);
+        if (ok)
+            context->CopySubresourceRegion(target, 0, 0, 0, 0, Sharpened(context, tech, g_gpu.hdrOut, renderW, renderH), 0,
+                                           &box);
     }
     t_busy = false;
     if (!ok) return FallBack(error.empty() ? "DLSS failed" : error);
@@ -586,7 +623,8 @@ bool OnStretch(command_list* cl, const PassState& ps) {
                      g_gpu.ldrOut, error);
         if (ok) {
             const D3D11_BOX out = {0, 0, 0, outW, outH, 1};
-            context->CopySubresourceRegion(target, 0, 0, 0, 0, g_gpu.ldrOut.tex, 0, &out);
+            context->CopySubresourceRegion(target, 0, 0, 0, 0, Sharpened(context, g_active, g_gpu.ldrOut, outW, outH), 0,
+                                           &out);
         }
     }
     t_busy = false;
@@ -690,16 +728,33 @@ void UpscalerOnSamplers(command_list* cl, shader_stage stages, const descriptor_
 }
 
 void UpscalerOnViewports(command_list* cl, uint32_t first, uint32_t count, const viewport* vps) {
-    if (first != 0 || count == 0 || count > 8 || IsImmediate(cl)) return;
-    int index;
+    if (first != 0 || count == 0 || count > 8) return;
+    const bool immediate = IsImmediate(cl);
+    int index = -1;
+    bool big = false;
     {
         std::lock_guard<std::mutex> lock(g_mutex);
         if (!g_jitterLive || !g_cfg.jitter || g_renderW <= 0) return;
-        if (vps[0].x != 0 || vps[0].y != 0 || vps[0].width != g_renderW || vps[0].height != g_renderH) return;
-        auto it = g_ctxIndex.find(cl->get_native());
-        if (it == g_ctxIndex.end()) it = g_ctxIndex.emplace(cl->get_native(), g_recordIndex).first;
-        index = it->second;
+        big = vps[0].width * vps[0].height >= 0.25f * g_renderW * g_renderH;
+        const bool match = !immediate && vps[0].x == 0 && vps[0].y == 0 && vps[0].width == g_renderW &&
+                           vps[0].height == g_renderH;
+        if (match) {
+            auto it = g_ctxIndex.find(cl->get_native());
+            if (it == g_ctxIndex.end()) it = g_ctxIndex.emplace(cl->get_native(), g_recordIndex).first;
+            index = it->second;
+        }
     }
+    // Frame captures: every viewport of at least a quarter of the render size says whether it got the
+    // jitter (for finding scene passes the jitter misses). Outside g_mutex: CaptureNote takes main.cpp's
+    // context lock, which OnSecondary holds while calling into the upscaler.
+    if (index < 0) {
+        if (big)
+            CaptureNote(cl, "viewport %gx%g at %g,%g depth %g-%g: NOT jittered (%s)", vps[0].width, vps[0].height, vps[0].x,
+                        vps[0].y, vps[0].min_depth, vps[0].max_depth, immediate ? "immediate context" : "size or origin");
+        return;
+    }
+    CaptureNote(cl, "viewport %gx%g depth %g-%g: jittered (index %d)", vps[0].width, vps[0].height, vps[0].min_depth,
+                vps[0].max_depth, index);
     float sx, sy;
     SampleOffset(index, &sx, &sy);
     viewport v[8];
@@ -771,10 +826,10 @@ void UpscalerOverlay() {
     }
     if (active == Tech::Fsr) ImGui::TextDisabled("%s: %s", bridge::VersionName().c_str(), bridge::Status().c_str());
     else ImGui::TextDisabled("DLSS: %s", dlss::Status().c_str());
-    if (active == Tech::Fsr) {
-        ImGui::SetNextItemWidth(260);
-        changed |= ImGui::SliderFloat("FSR sharpness", &g_cfg.fsrSharpness, 0.0f, 1.0f, "%.2f");
-    }
+    ImGui::SetNextItemWidth(260);
+    changed |= ImGui::SliderFloat("Sharpening", &g_cfg.sharpness, 0.0f, 1.0f, g_cfg.sharpness > 0.001f ? "%.2f" : "off");
+    ImGui::SameLine();
+    ImGui::TextDisabled("(AMD RCAS%s)", active == Tech::Fsr ? ", FSR's own" : " after DLSS");
     {
         std::lock_guard<std::mutex> lock(g_mutex);
         if (!g_error.empty()) ImGui::TextColored(ImVec4(1.0f, 0.7f, 0.3f, 1.0f), "Game TAA in use: %s", g_error.c_str());

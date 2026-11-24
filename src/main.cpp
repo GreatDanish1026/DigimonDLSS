@@ -1038,6 +1038,17 @@ void Log(const char* fmt, ...) {
 
 std::wstring ExeDir() { return g_exeDir; }
 
+void CaptureNote(command_list* cl, const char* fmt, ...) {
+    if (!Recording()) return;
+    char buf[512];
+    va_list ap;
+    va_start(ap, fmt);
+    vsnprintf(buf, sizeof(buf), fmt, ap);
+    va_end(ap);
+    std::lock_guard<std::mutex> lock(g_ctxMutex);
+    AddLocked(Ctx(cl), buf);
+}
+
 bool IsImmediate(command_list* cl) { return g_immediate && cl->get_native() == g_immediate; }
 
 bool SetRenderScale(float scale) {
