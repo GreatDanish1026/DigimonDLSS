@@ -300,6 +300,21 @@ std::map<int, int> g_frameIndices;             // indices of the lists executed 
 bool g_jitterLive = false;                     // DLSS ran on the last frame: the scene may be jittered
 float g_renderW = 0, g_renderH = 0;            // the TAA viewport (the render size), 0 until the first one
 
+// A viewport at (0,0) of the render size, within 2 pixels: at fractional scales (2560 x 2/3 = 1706.67,
+// 3840 x 0.58 = 2227.2) passes can round the size differently from the TAA's viewport, and an exact
+// match left them unjittered (1.0.3: shimmering trees when upscaling on a 2560x1080 screen). Sizes that
+// differ are logged the first time. Called with g_mutex held.
+std::map<std::pair<int, int>, bool> g_nearSizes;
+bool RenderSized(const viewport& v) {
+    if (v.x != 0 || v.y != 0 || g_renderW <= 0 || g_renderH <= 0) return false;
+    const float dw = std::fabs(v.width - g_renderW), dh = std::fabs(v.height - g_renderH);
+    if (dw > 2.0f || dh > 2.0f) return false;
+    if ((dw != 0 || dh != 0) && g_nearSizes.size() < 16 &&
+        g_nearSizes.emplace(std::make_pair(static_cast<int>(v.width * 100), static_cast<int>(v.height * 100)), true).second)
+        Log("viewport %gx%g matched to the render size %gx%g", v.width, v.height, g_renderW, g_renderH);
+    return true;
+}
+
 // ---------------------------------------------------------------- state
 
 // Upscaling: what the TAA left for the stretch pass of the same frame.
@@ -751,8 +766,7 @@ void UpscalerOnViewports(command_list* cl, uint32_t first, uint32_t count, const
         std::lock_guard<std::mutex> lock(g_mutex);
         if (!g_jitterLive || !g_cfg.jitter || g_renderW <= 0) return;
         big = vps[0].width * vps[0].height >= 0.25f * g_renderW * g_renderH;
-        const bool match = !immediate && vps[0].x == 0 && vps[0].y == 0 && vps[0].width == g_renderW &&
-                           vps[0].height == g_renderH;
+        const bool match = !immediate && RenderSized(vps[0]);
         if (match) {
             auto it = g_ctxIndex.find(cl->get_native());
             if (it == g_ctxIndex.end()) it = g_ctxIndex.emplace(cl->get_native(), g_recordIndex).first;
@@ -876,8 +890,7 @@ void UpscalerBeforeDraw(command_list* cl) {
     {
         std::lock_guard<std::mutex> lock(g_mutex);
         had = g_immJittered;
-        const bool scene = g_beforeTaa && g_jitterLive && g_cfg.jitter && g_renderW > 0 && ps.vp.x == 0 && ps.vp.y == 0 &&
-                           ps.vp.width == g_renderW && ps.vp.height == g_renderH && ps.dsv.handle;
+        const bool scene = g_beforeTaa && g_jitterLive && g_cfg.jitter && RenderSized(ps.vp) && ps.dsv.handle;
         if (scene && IsWorldVs(ps.vs) && !screenInput) {
             int best = 0;  // the jitter this frame's scene command lists were drawn with
             for (const auto& [i, n] : g_frameIndices)

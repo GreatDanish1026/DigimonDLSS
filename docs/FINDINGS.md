@@ -256,3 +256,12 @@ ran (user kept Sharpness=1). 1.0.3: no jitter for draws whose pixel shader reads
 texture (screen-space passes).
 1.0.3 test log (2026-11-24): only vs85af431b/psa4f4a9d9 jittered on the main context; DLAA and
 Quality ran, no fallbacks, no mixed jitter. User kept Quality, jitter on, Sharpness 1.
+
+### 1.0.4 (2026-11-24): fractional render sizes
+
+Report after 1.0.3: DLAA fixed, upscaling still shimmers around trees. The reporter's video showed a
+2560x1080 screen at Quality: render 1706x720 (2560 x 2/3 = 1706.67). The jitter matched scene
+viewports to the TAA viewport exactly, so passes rounding the size differently stayed unjittered;
+at 4K Quality is exactly 2560x1440, so it never showed here (Balanced at 4K is fractional too:
+2227.2 x 1252.8). 1.0.4: render-size viewports matched within 2 pixels (RenderSized), every
+differing size logged once ("viewport ... matched to the render size ...").
