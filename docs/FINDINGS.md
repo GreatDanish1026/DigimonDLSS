@@ -254,3 +254,5 @@ and vs4bdb1306/psbb8b8bf0, a full-screen copy of the scene image before the TAA 
 also names a ViewProj matrix (wrongly jittered: shifts the jittered image again). DLAA sharpening
 ran (user kept Sharpness=1). 1.0.3: no jitter for draws whose pixel shader reads a screen-sized
 texture (screen-space passes).
+1.0.3 test log (2026-11-24): only vs85af431b/psa4f4a9d9 jittered on the main context; DLAA and
+Quality ran, no fallbacks, no mixed jitter. User kept Quality, jitter on, Sharpness 1.
