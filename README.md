@@ -1,4 +1,4 @@
-# DigimonDLSS 1.0.3
+# DigimonDLSS 1.0.5
 
 ReShade add-on for **Digimon Story: Time Stranger** (PC, DirectX 11) that replaces the game's TAA
 with **NVIDIA DLSS** or **AMD FSR 3.1 / FSR 4**, for native anti-aliasing or upscaling.
@@ -92,6 +92,10 @@ MIT (LICENSE). Third-party licences in `DigimonDLSS-licenses` and THIRD_PARTY_NO
 
 ## Changes
 
+- **1.0.5**: Fixed shimmering around trees when upscaling (DLAA was fixed in 1.0.3): particles
+  weren't given the camera jitter in the upscaling modes. Scene passes are also recognised when the
+  render size isn't a whole number of pixels (e.g. Quality on a 2560x1080 screen). The log lists
+  which of the game's separately drawn objects get the jitter.
 - **1.0.3**: Sharpening slider for DLSS and FSR (replaces 1.0.0's FSR sharpness; the old setting
   carries over). Fixed shimmering around trees with camera jitter on: particles and sprites the game
   draws outside its main scene passes now get the jitter too. The frame capture tool marks which
